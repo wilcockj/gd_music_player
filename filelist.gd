@@ -9,27 +9,31 @@ func _on_set_playback_position(pos, length):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	EventBus.set_playback_position.connect(_on_set_playback_position)
-
+	EventBus.song_request.connect(song_changed)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
 func add_list_of_files(list):
-	for filepath : String in list:
-		# get file from path
+	for i in list.size():
+		# get file from pathda
 		# split by / get -1
+		var filepath: String = list[i]
 		var filename = filepath.split("/",true)[-1]
 		#print(file.split("/",true)[-1])
 		var new_button = Button.new()
 		new_button.text = filename
 		new_button.set_meta("path",filepath)
+		new_button.set_meta("index",i)
 		new_button.pressed.connect(play_song.bind(new_button))
 		%FileDisplayVbox.add_child(new_button)
 
 func play_song(button):
 	print("Should play " + button.get_meta("path"))
-	EventBus.song_request.emit(button.get_meta("path"))
-	%SongName.text = button.text
+	EventBus.song_request.emit(button.get_meta("path"),button.get_meta("index"))
+	
+func song_changed(path,index):
+	%SongName.text = path.split("/",true)[-1]
 	
 func _on_reverb_check_box_toggled(toggled_on):
 	EventBus.set_reverb.emit(toggled_on)

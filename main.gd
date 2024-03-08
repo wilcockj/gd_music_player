@@ -1,7 +1,7 @@
 extends Node2D
 
 var mp3_list: Array[String]
-
+var current_song_idx = -1
 @onready var Player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var filelist: PackedScene = load("res://filelist.tscn")
 # Called when the node enters the scene tree for the first time.
@@ -53,11 +53,12 @@ func _on_file_dialog_dir_selected(dir):
 	list.add_list_of_files(mp3_list)
 
 
-func _on_song_request(song_path):
+func _on_song_request(song_path,index):
 	print("In main song path that was requested = ", song_path)
 	var stream = load_mp3(song_path)
 	$AudioStreamPlayer.stream = stream
 	$AudioStreamPlayer.playing = true
+	current_song_idx = index
 	
 	
 func load_mp3(path):
@@ -72,3 +73,13 @@ func _on_timer_timeout():
 		var len = Player.stream.get_length()
 		EventBus.set_playback_position.emit(pos, len)
 	$Timer.start(0.1)
+
+
+func _on_audio_stream_player_finished():
+	pass # Replace with function body.
+	#play next in list
+	if current_song_idx < mp3_list.size() - 1:
+		EventBus.song_request.emit(mp3_list[current_song_idx+1],current_song_idx+1)
+	else:
+		print("Reached final song")
+	
