@@ -13,6 +13,8 @@ func _ready():
 		%FileDialog.root_subfolder = "/storage/emulated/0/"
 	if OS.get_name() == "macOS":
 		%FileDialog.root_subfolder = "/Users/"
+	if OS.get_name() == "Linux":
+		%FileDialog.root_subfolder = "/home"
 	#get_tree().create_timer(1).timeout.connect(func():$AudioStreamPlayer.playing = true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
