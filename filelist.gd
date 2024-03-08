@@ -1,17 +1,17 @@
 extends Control
 
 
+@onready var PitchLabel: Label = $HBoxContainer/VBoxContainer/Pitch/PitchLabel
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
 func add_list_of_files(list):
-	
 	for filepath : String in list:
 		# get file from path
 		# split by / get -1
@@ -30,3 +30,8 @@ func play_song(button):
 	
 func _on_reverb_check_box_toggled(toggled_on):
 	EventBus.set_reverb.emit(toggled_on)
+
+func _on_pitch_slider_value_changed(value):
+	PitchLabel.text = str(value)
+	var pitch: AudioEffectPitchShift = AudioServer.get_bus_effect(0, 1)
+	pitch.pitch_scale = value
