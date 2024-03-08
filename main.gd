@@ -1,6 +1,8 @@
 extends Node2D
 
 var mp3_list: Array[String]
+
+@onready var Player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var filelist: PackedScene = load("res://filelist.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -61,3 +63,10 @@ func load_mp3(path):
 	var sound = AudioStreamMP3.new()
 	sound.data = file.get_buffer(file.get_length())
 	return sound
+
+func _on_timer_timeout():
+	if Player.playing:
+		var pos = Player.get_playback_position()
+		var len = Player.stream.get_length()
+		EventBus.set_playback_position.emit(pos, len)
+	$Timer.start(0.1)
