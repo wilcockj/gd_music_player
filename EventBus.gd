@@ -1,5 +1,6 @@
 extends Node
 signal song_request(song_path)
+signal set_reverb(onoff)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

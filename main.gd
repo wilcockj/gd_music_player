@@ -5,6 +5,7 @@ var mp3_list: Array[String]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	EventBus.song_request.connect(_on_song_request)
+	EventBus.set_reverb.connect(_on_set_reverb)
 	#get_tree().create_timer(1).timeout.connect(func():$AudioStreamPlayer.playing = true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -12,7 +13,9 @@ func _process(delta):
 	pass
 	
 	
-
+func _on_set_reverb(onoff):
+	AudioServer.set_bus_effect_enabled(0, 0, onoff)
+	
 
 func explore_dir(dir):
 	if dir:
