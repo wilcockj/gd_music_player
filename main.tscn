@@ -20,7 +20,6 @@ content_scale_mode = 2
 ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
-root_subfolder = "/home/"
 script = ExtResource("2_kph3m")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -29,4 +28,9 @@ autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
 [connection signal="dir_selected" from="FileDialog" to="." method="_on_file_dialog_dir_selected"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

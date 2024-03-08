@@ -1,6 +1,8 @@
 extends Node2D
 
 var mp3_list: Array[String]
+
+@onready var Player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var filelist: PackedScene = load("res://filelist.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,6 +11,8 @@ func _ready():
 	OS.get_name()
 	if OS.get_name() == "Android":
 		%FileDialog.root_subfolder = "/storage/emulated/0/"
+	if OS.get_name() == "macOS":
+		%FileDialog.root_subfolder = "/Users/"
 	#get_tree().create_timer(1).timeout.connect(func():$AudioStreamPlayer.playing = true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -59,3 +63,10 @@ func load_mp3(path):
 	var sound = AudioStreamMP3.new()
 	sound.data = file.get_buffer(file.get_length())
 	return sound
+
+func _on_timer_timeout():
+	if Player.playing:
+		var pos = Player.get_playback_position()
+		var len = Player.stream.get_length()
+		EventBus.set_playback_position.emit(pos, len)
+	$Timer.start(0.1)

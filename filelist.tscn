@@ -45,6 +45,9 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "asdasdasdd"
 
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -55,6 +58,26 @@ alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Settings:"
+
+[node name="Pitch" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Pitch"]
+layout_mode = 2
+text = "Pitch:"
+
+[node name="PitchSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/Pitch"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 0.25
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="PitchLabel" type="Label" parent="HBoxContainer/VBoxContainer/Pitch"]
+layout_mode = 2
+text = "1.0"
 
 [node name="Reverb" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -82,4 +105,5 @@ size_flags_vertical = 3
 [node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/Pitch/PitchSlider" to="." method="_on_pitch_slider_value_changed"]
 [connection signal="toggled" from="HBoxContainer/VBoxContainer/Reverb/ReverbCheckBox" to="." method="_on_reverb_check_box_toggled"]

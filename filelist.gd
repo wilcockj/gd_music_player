@@ -3,9 +3,12 @@ extends Control
 
 @onready var PitchLabel: Label = $HBoxContainer/VBoxContainer/Pitch/PitchLabel
 
+func _on_set_playback_position(pos, length):
+	$HBoxContainer/VBoxContainer2/ProgressBar.value = (pos / length) * 100
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	EventBus.set_playback_position.connect(_on_set_playback_position)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
