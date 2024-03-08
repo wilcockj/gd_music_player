@@ -9,6 +9,8 @@ func _ready():
 	OS.get_name()
 	if OS.get_name() == "Android":
 		%FileDialog.root_subfolder = "/storage/emulated/0/"
+	if OS.get_name() == "macOS":
+		%FileDialog.root_subfolder = "/Users/"
 	#get_tree().create_timer(1).timeout.connect(func():$AudioStreamPlayer.playing = true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
