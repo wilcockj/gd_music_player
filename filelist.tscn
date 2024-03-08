@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjhx883qcvbi1"]
+[gd_scene load_steps=5 format=3 uid="uid://cjhx883qcvbi1"]
 
 [ext_resource type="Script" path="res://filelist.gd" id="1_825yq"]
 [ext_resource type="Texture2D" uid="uid://5jf1srlo68mb" path="res://tempalbumart.png" id="2_a0ggw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qmn3"]
+corner_radius_top_left = 200
+corner_radius_top_right = 200
+corner_radius_bottom_right = 200
+corner_radius_bottom_left = 200
+corner_detail = 20
+
+[sub_resource type="Theme" id="Theme_015xr"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -24,12 +33,22 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2"]
+[node name="Panel2" type="Panel" parent="HBoxContainer/VBoxContainer2"]
+clip_children = 1
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_3qmn3")
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_015xr")
 texture = ExtResource("2_a0ggw")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
