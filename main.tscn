@@ -1,13 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5sm757wy81jr"]
+[gd_scene load_steps=3 format=3 uid="uid://c5sm757wy81jr"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_rekgr"]
 [ext_resource type="Script" path="res://FileDialog.gd" id="2_kph3m"]
-[ext_resource type="PackedScene" uid="uid://cjhx883qcvbi1" path="res://filelist.tscn" id="4_6672k"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_rekgr")
 
 [node name="FileDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
 mode = 3
 title = "Open a Directory"
 size = Vector2i(689, 159)
@@ -20,8 +20,7 @@ content_scale_mode = 2
 ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
-root_subfolder = "/home/jamesw/Music"
-show_hidden_files = true
+root_subfolder = "/home/"
 script = ExtResource("2_kph3m")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -29,7 +28,5 @@ volume_db = -13.453
 autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" parent="CanvasLayer" instance=ExtResource("4_6672k")]
 
 [connection signal="dir_selected" from="FileDialog" to="." method="_on_file_dialog_dir_selected"]

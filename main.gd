@@ -6,6 +6,9 @@ var mp3_list: Array[String]
 func _ready():
 	EventBus.song_request.connect(_on_song_request)
 	EventBus.set_reverb.connect(_on_set_reverb)
+	OS.get_name()
+	if OS.get_name() == "Android":
+		%FileDialog.root_subfolder = "/storage/emulated/0/"
 	#get_tree().create_timer(1).timeout.connect(func():$AudioStreamPlayer.playing = true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,7 +44,7 @@ func _on_file_dialog_dir_selected(dir):
 	#print(mp3_list)
 	var list = filelist.instantiate()
 	get_tree().root.add_child(list)
-	$CanvasLayer/Control.add_list_of_files(mp3_list)
+	list.add_list_of_files(mp3_list)
 
 
 func _on_song_request(song_path):

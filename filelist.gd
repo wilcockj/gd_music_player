@@ -26,6 +26,7 @@ func add_list_of_files(list):
 func play_song(button):
 	print("Should play " + button.get_meta("path"))
 	EventBus.song_request.emit(button.get_meta("path"))
+	%SongName.text = button.text
 	
 func _on_reverb_check_box_toggled(toggled_on):
 	EventBus.set_reverb.emit(toggled_on)
