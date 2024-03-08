@@ -2,7 +2,7 @@ extends Control
 
 
 @onready var PitchLabel: Label = $HBoxContainer/VBoxContainer/Pitch/PitchLabel
-
+@onready var VolumeLabel: Label = $HBoxContainer/VBoxContainer/Volume/VolumeLabel
 func _on_set_playback_position(pos, length):
 	$HBoxContainer/VBoxContainer2/ProgressBar.value = (pos / length) * 100
 
@@ -38,3 +38,12 @@ func _on_pitch_slider_value_changed(value):
 	PitchLabel.text = str(value)
 	var pitch: AudioEffectPitchShift = AudioServer.get_bus_effect(0, 1)
 	pitch.pitch_scale = value
+
+
+func _on_volume_slider_value_changed(value):
+	#(-80-0)
+	var new_volume_db = remap(value,0,100,-40,0)
+	AudioServer.set_bus_volume_db(0,new_volume_db)
+	print("Set volume to " + str(new_volume_db))
+	VolumeLabel.text = str(value) + "%"
+	

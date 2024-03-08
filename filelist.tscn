@@ -108,6 +108,23 @@ text = "Reverb:"
 [node name="ReverbCheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/Reverb"]
 layout_mode = 2
 
+[node name="Volume" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Volume"]
+layout_mode = 2
+text = "Volume:"
+
+[node name="VolumeSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/Volume"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="VolumeLabel" type="Label" parent="HBoxContainer/VBoxContainer/Volume"]
+layout_mode = 2
+text = "100%"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -126,3 +143,4 @@ layout_mode = 2
 
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/Pitch/PitchSlider" to="." method="_on_pitch_slider_value_changed"]
 [connection signal="toggled" from="HBoxContainer/VBoxContainer/Reverb/ReverbCheckBox" to="." method="_on_reverb_check_box_toggled"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
