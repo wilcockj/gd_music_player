@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjhx883qcvbi1"]
+[gd_scene load_steps=11 format=3 uid="uid://cjhx883qcvbi1"]
 
 [ext_resource type="Script" path="res://filelist.gd" id="1_825yq"]
 [ext_resource type="Theme" uid="uid://fk3h2ypd21ic" path="res://assets/themes/main_theme.tres" id="1_r21w7"]
@@ -15,7 +15,13 @@ corner_radius_bottom_right = 75
 corner_radius_bottom_left = 75
 corner_detail = 20
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iel42"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avyu3"]
+bg_color = Color(1, 1, 1, 0.270588)
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2t1i"]
+bg_color = Color(1, 1, 1, 0.0470588)
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -27,19 +33,26 @@ grow_vertical = 2
 theme = ExtResource("1_r21w7")
 script = ExtResource("1_825yq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
@@ -47,14 +60,14 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Panel2" type="Panel" parent="HBoxContainer/VBoxContainer2/MarginContainer"]
+[node name="Panel2" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer"]
 clip_children = 1
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_3qmn3")
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/MarginContainer/Panel2"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/Panel2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,29 +77,29 @@ grow_vertical = 2
 size_flags_vertical = 3
 texture = ExtResource("3_gk44b")
 
-[node name="SongName" type="Label" parent="HBoxContainer/VBoxContainer2"]
+[node name="SongName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_6el5d")
 theme_override_font_sizes/font_size = 25
 text = "No Song Playing"
 horizontal_alignment = 1
 
-[node name="ArtistName" type="Label" parent="HBoxContainer/VBoxContainer2"]
+[node name="ArtistName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.701961, 0.701961, 0.701961, 1)
 theme_override_font_sizes/font_size = 20
 text = "Unknown Artist"
 horizontal_alignment = 1
 
-[node name="Scrubber" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+[node name="Scrubber" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="CurrentTimeLabel" type="Label" parent="HBoxContainer/VBoxContainer2/Scrubber"]
+[node name="CurrentTimeLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/Scrubber"]
 layout_mode = 2
 text = "0:00"
 vertical_alignment = 1
 
-[node name="ScrubberSlider" type="HSlider" parent="HBoxContainer/VBoxContainer2/Scrubber"]
+[node name="ScrubberSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer2/Scrubber"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -94,18 +107,18 @@ step = 0.01
 scrollable = false
 tick_count = 2
 
-[node name="TimeLeftLabel" type="Label" parent="HBoxContainer/VBoxContainer2/Scrubber"]
+[node name="TimeLeftLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/Scrubber"]
 layout_mode = 2
 text = "-0:00"
 
-[node name="ScrubberChangedTimer" type="Timer" parent="HBoxContainer/VBoxContainer2/Scrubber"]
+[node name="ScrubberChangedTimer" type="Timer" parent="MarginContainer/HBoxContainer/VBoxContainer2/Scrubber"]
 wait_time = 0.1
 
-[node name="Controls" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+[node name="Controls" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 alignment = 1
 
-[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer2/Controls"]
+[node name="BackButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/Controls"]
 custom_minimum_size = Vector2(70, 2.08165e-12)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_15vpq")
@@ -116,7 +129,7 @@ script = ExtResource("5_00kdk")
 icon_name = "skip-backward"
 icon_size = 32
 
-[node name="PlayPauseButton" type="Button" parent="HBoxContainer/VBoxContainer2/Controls"]
+[node name="PlayPauseButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/Controls"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_15vpq")
@@ -127,7 +140,7 @@ script = ExtResource("5_00kdk")
 icon_name = "pause"
 icon_size = 32
 
-[node name="ForwardButton" type="Button" parent="HBoxContainer/VBoxContainer2/Controls"]
+[node name="ForwardButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/Controls"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_15vpq")
@@ -138,30 +151,30 @@ script = ExtResource("5_00kdk")
 icon_name = "skip-forward"
 icon_size = 32
 
-[node name="BottomPad" type="Panel" parent="HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(2.08165e-12, 20)
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_iel42")
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxFlat_avyu3")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Settings:"
 
-[node name="Pitch" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="Pitch" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Pitch"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Pitch"]
 layout_mode = 2
 text = "Pitch:"
 
-[node name="PitchSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/Pitch"]
+[node name="PitchSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/Pitch"]
 custom_minimum_size = Vector2(200, 2.08165e-12)
 layout_mode = 2
 size_flags_vertical = 4
@@ -170,62 +183,63 @@ max_value = 2.0
 step = 0.01
 value = 1.0
 
-[node name="PitchLabel" type="Label" parent="HBoxContainer/VBoxContainer/Pitch"]
+[node name="PitchLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Pitch"]
 layout_mode = 2
 text = "1.0"
 
-[node name="Reverb" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="Reverb" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Reverb"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Reverb"]
 layout_mode = 2
 text = "Reverb:"
 
-[node name="ReverbCheckBox" type="CheckBox" parent="HBoxContainer/VBoxContainer/Reverb"]
+[node name="ReverbCheckBox" type="CheckBox" parent="MarginContainer/HBoxContainer/VBoxContainer/Reverb"]
 layout_mode = 2
 
-[node name="Volume" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="Volume" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Volume"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Volume"]
 layout_mode = 2
 text = "Volume:"
 
-[node name="VolumeSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/Volume"]
+[node name="VolumeSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/Volume"]
 custom_minimum_size = Vector2(200, 2.08165e-12)
 layout_mode = 2
 size_flags_vertical = 4
 value = 100.0
 
-[node name="VolumeLabel" type="Label" parent="HBoxContainer/VBoxContainer/Volume"]
+[node name="VolumeLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Volume"]
 layout_mode = 2
 text = "100%"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 
-[node name="FileDisplayVbox" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="FileDisplayVbox" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer"]
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(2.08165e-12, 200)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x2t1i")
 
-[node name="Spectrum" type="Node2D" parent="HBoxContainer/VBoxContainer/Panel"]
+[node name="Spectrum" type="Node2D" parent="MarginContainer/HBoxContainer/VBoxContainer/Panel"]
 script = ExtResource("7_gfv6v")
 
-[connection signal="drag_ended" from="HBoxContainer/VBoxContainer2/Scrubber/ScrubberSlider" to="." method="_on_scrubber_slider_drag_ended"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer2/Controls/PlayPauseButton" to="." method="_on_play_pause_button_pressed"]
-[connection signal="value_changed" from="HBoxContainer/VBoxContainer/Pitch/PitchSlider" to="." method="_on_pitch_slider_value_changed"]
-[connection signal="toggled" from="HBoxContainer/VBoxContainer/Reverb/ReverbCheckBox" to="." method="_on_reverb_check_box_toggled"]
-[connection signal="value_changed" from="HBoxContainer/VBoxContainer/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="drag_ended" from="MarginContainer/HBoxContainer/VBoxContainer2/Scrubber/ScrubberSlider" to="." method="_on_scrubber_slider_drag_ended"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/Controls/PlayPauseButton" to="." method="_on_play_pause_button_pressed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/Pitch/PitchSlider" to="." method="_on_pitch_slider_value_changed"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer/Reverb/ReverbCheckBox" to="." method="_on_reverb_check_box_toggled"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]

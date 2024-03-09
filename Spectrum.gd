@@ -45,4 +45,4 @@ func _draw():
 		var magnitude = average_magnitudes[i]
 		var energy = clamp((MIN_DB + linear_to_db(magnitude)) / MIN_DB, 0, 1)
 		var height = energy * HEIGHT
-		draw_rect(Rect2(w * (i + 1), HEIGHT - height, w, height), Color.WHITE)
+		draw_rect(Rect2(w * (i + 1), HEIGHT - height, w, height), Color.LIME_GREEN)
