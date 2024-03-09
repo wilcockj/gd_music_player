@@ -222,6 +222,7 @@ custom_minimum_size = Vector2(2.08165e-12, 200)
 layout_mode = 2
 
 [node name="Spectrum" type="Node2D" parent="HBoxContainer/VBoxContainer/Panel"]
+position = Vector2(-1, 1)
 script = ExtResource("7_gfv6v")
 
 [connection signal="drag_ended" from="HBoxContainer/VBoxContainer2/Scrubber/ScrubberSlider" to="." method="_on_scrubber_slider_drag_ended"]
