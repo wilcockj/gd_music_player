@@ -14,6 +14,8 @@ extends Control
 @onready var SongName := $HBoxContainer/VBoxContainer2/SongName
 @onready var ArtistName := $HBoxContainer/VBoxContainer2/ArtistName
 
+@onready var tmp_art = load("res://assets/images/tmp_art.tres")
+
 var button_list: Array[Button]
 var song_index = -1
 func _ready():
@@ -24,6 +26,9 @@ func _ready():
 func _on_metadata_received(meta: MusicMeta.MusicMetadata):
 	if meta.cover:
 		AlbumArt.texture = meta.cover
+	else:
+		AlbumArt.texture = tmp_art
+		
 	SongName.text = meta.title if meta.title else "NO DATA FOUND"
 	ArtistName.text = meta.album if meta.album else "NO DATA FOUND"
 

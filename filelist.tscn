@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://filelist.gd" id="1_825yq"]
 [ext_resource type="Theme" uid="uid://fk3h2ypd21ic" path="res://assets/themes/main_theme.tres" id="1_r21w7"]
-[ext_resource type="Texture2D" uid="uid://5jf1srlo68mb" path="res://tempalbumart.png" id="2_a0ggw"]
 [ext_resource type="FontFile" uid="uid://r6o61b6yhw6w" path="res://assets/fonts/SpaceMono-Bold.ttf" id="3_6el5d"]
+[ext_resource type="Texture2D" uid="uid://bvei72lwd33qp" path="res://assets/images/tmp_art.tres" id="3_gk44b"]
 [ext_resource type="FontFile" uid="uid://bg7oys2cgqpao" path="res://addons/material-design-icons/fonts/material_design_icons.ttf" id="4_15vpq"]
 [ext_resource type="Script" path="res://addons/material-design-icons/nodes/MaterialButton.gd" id="5_00kdk"]
 
@@ -61,7 +61,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-texture = ExtResource("2_a0ggw")
+texture = ExtResource("3_gk44b")
 
 [node name="SongName" type="Label" parent="HBoxContainer/VBoxContainer2"]
 layout_mode = 2
