@@ -1,0 +1,3 @@
+[submodule "addons/MusicMeta"]
+	path = addons/MusicMeta
+	url = git@github.com:AineeJames/MusicMeta.git

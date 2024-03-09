@@ -24,6 +24,7 @@ driver/mix_rate.web=44100
 
 EventBus="*res://EventBus.gd"
 MaterialIconsDB="*res://addons/material-design-icons/icons/icons.gd"
+MusicMeta="*res://addons/MusicMeta/MusicMeta.gd"
 
 [display]
 
@@ -33,7 +34,7 @@ window/stretch/aspect="ignore"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/material-design-icons/plugin.cfg")
+enabled=PackedStringArray("res://addons/MusicMeta/plugin.cfg", "res://addons/material-design-icons/plugin.cfg")
 
 [rendering]
 

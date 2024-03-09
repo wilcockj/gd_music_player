@@ -10,12 +10,21 @@ extends Control
 @onready var ScrubberSlider: HSlider = $HBoxContainer/VBoxContainer2/Scrubber/ScrubberSlider
 @onready var TimeLeftLabel: Label = $HBoxContainer/VBoxContainer2/Scrubber/TimeLeftLabel
 @onready var PlayPauseButton: MaterialButton = $HBoxContainer/VBoxContainer2/Controls/PlayPauseButton
+@onready var AlbumArt := $HBoxContainer/VBoxContainer2/Panel2/TextureRect
+@onready var SongName := $HBoxContainer/VBoxContainer2/SongName
+@onready var ArtistName := $HBoxContainer/VBoxContainer2/ArtistName
 
 var button_list: Array[Button]
 var song_index = -1
 func _ready():
 	EventBus.set_playback_position.connect(_on_set_playback_position)
 	EventBus.song_request.connect(song_changed)
+	EventBus.metadata_received.connect(_on_metadata_received)
+
+func _on_metadata_received(meta: MusicMeta.MusicMetadata):
+	AlbumArt.texture = meta.cover
+	SongName.text = meta.title if meta.title else "NO DATA FOUND"
+	ArtistName.text = meta.album if meta.album else "NO DATA FOUND"
 
 func _on_set_playback_position(pos, length):
 	CurrentTimeLabel.text = "%d:%02d"%[int(floor(pos / 60.0)), int(pos) % 60]
@@ -40,7 +49,7 @@ func play_song(button):
 	EventBus.song_request.emit(button.get_meta("path"),song_index,button.get_meta("index"))
 	
 func song_changed(path,prev_index,new_index):
-	%SongName.text = path.split("/",true)[-1]
+	#SongName.text = path.split("/",true)[-1]
 	button_list[prev_index].modulate = Color.WHITE
 	button_list[new_index].modulate = Color.GREEN
 	song_index = new_index

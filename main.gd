@@ -71,6 +71,8 @@ func _on_song_request(song_path,prev_index,new_index):
 	$AudioStreamPlayer.playing = true
 	current_song_idx = new_index
 	
+	var meta: MusicMeta.MusicMetadata = MusicMeta.get_metadata_mp3(stream)
+	EventBus.metadata_received.emit(meta)
 	
 func load_mp3(path):
 	var file = FileAccess.open(path, FileAccess.READ)
