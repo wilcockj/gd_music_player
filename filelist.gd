@@ -1,5 +1,8 @@
 extends Control
 
+# TODO make scrolling behavior nicer on mobile
+# require press and release on button to play if
+# press and drag should scroll
 
 @onready var PitchLabel: Label = $HBoxContainer/VBoxContainer/Pitch/PitchLabel
 @onready var VolumeLabel: Label = $HBoxContainer/VBoxContainer/Volume/VolumeLabel
