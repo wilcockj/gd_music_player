@@ -23,6 +23,7 @@ func _ready():
 		%FileDialog.root_subfolder = "/home"
 
 func _on_scrub_to_percent(percent):
+	print("time to scrub")
 	var len = Player.stream.get_length()
 	var pos = len * percent
 	Player.play(pos)

@@ -61,5 +61,17 @@ func _on_play_pause_button_pressed():
 		EventBus.pause.emit()
 
 func _on_scrubber_slider_drag_ended(value_changed):
+	# TODO: This only changes when you drag and then release
+	# would be nice to be able to tap or click and have it 
+	# change to that point
 	if value_changed:
 		EventBus.scrub_to_percent.emit(ScrubberSlider.value / 100.0)
+
+
+func _on_scrubber_slider_value_changed(value):
+	$HBoxContainer/VBoxContainer2/Scrubber/ScrubberChangedTimer.start()
+	
+
+
+func _on_scrubber_changed_timer_timeout():
+	EventBus.scrub_to_percent.emit(ScrubberSlider.value / 100.0)
