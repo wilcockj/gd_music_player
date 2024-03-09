@@ -4,15 +4,15 @@ extends Control
 # require press and release on button to play if
 # press and drag should scroll
 
-@onready var PitchLabel: Label = $HBoxContainer/VBoxContainer/Pitch/PitchLabel
-@onready var VolumeLabel: Label = $HBoxContainer/VBoxContainer/Volume/VolumeLabel
-@onready var CurrentTimeLabel: Label = $HBoxContainer/VBoxContainer2/Scrubber/CurrentTimeLabel
-@onready var ScrubberSlider: HSlider = $HBoxContainer/VBoxContainer2/Scrubber/ScrubberSlider
-@onready var TimeLeftLabel: Label = $HBoxContainer/VBoxContainer2/Scrubber/TimeLeftLabel
-@onready var PlayPauseButton: MaterialButton = $HBoxContainer/VBoxContainer2/Controls/PlayPauseButton
-@onready var AlbumArt := $HBoxContainer/VBoxContainer2/MarginContainer/Panel2/TextureRect
-@onready var SongName := $HBoxContainer/VBoxContainer2/SongName
-@onready var ArtistName := $HBoxContainer/VBoxContainer2/ArtistName
+@onready var PitchLabel: Label = %PitchLabel
+@onready var VolumeLabel: Label = %VolumeLabel
+@onready var CurrentTimeLabel: Label = %CurrentTimeLabel
+@onready var ScrubberSlider: HSlider = %ScrubberSlider
+@onready var TimeLeftLabel: Label = %TimeLeftLabel
+@onready var PlayPauseButton: MaterialButton = %PlayPauseButton
+@onready var AlbumArt := %AlbumArt
+@onready var SongName := %SongName
+@onready var ArtistName := %ArtistName
 
 @onready var tmp_art = load("res://assets/images/tmp_art.tres")
 

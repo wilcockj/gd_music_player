@@ -67,7 +67,8 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_3qmn3")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/Panel2"]
+[node name="AlbumArt" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/Panel2"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -78,6 +79,7 @@ size_flags_vertical = 3
 texture = ExtResource("3_gk44b")
 
 [node name="SongName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_6el5d")
 theme_override_font_sizes/font_size = 25
@@ -85,6 +87,7 @@ text = "No Song Playing"
 horizontal_alignment = 1
 
 [node name="ArtistName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.701961, 0.701961, 0.701961, 1)
 theme_override_font_sizes/font_size = 20
@@ -95,11 +98,13 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="CurrentTimeLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/Scrubber"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "0:00"
 vertical_alignment = 1
 
 [node name="ScrubberSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer2/Scrubber"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -108,6 +113,7 @@ scrollable = false
 tick_count = 2
 
 [node name="TimeLeftLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/Scrubber"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "-0:00"
 
@@ -130,6 +136,7 @@ icon_name = "skip-backward"
 icon_size = 32
 
 [node name="PlayPauseButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/Controls"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_15vpq")
@@ -184,6 +191,7 @@ step = 0.01
 value = 1.0
 
 [node name="PitchLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Pitch"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "1.0"
 
@@ -211,6 +219,7 @@ size_flags_vertical = 4
 value = 100.0
 
 [node name="VolumeLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Volume"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "100%"
 
