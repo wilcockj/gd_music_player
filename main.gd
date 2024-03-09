@@ -64,12 +64,12 @@ func _on_file_dialog_dir_selected(dir):
 	list.add_list_of_files(mp3_list)
 
 
-func _on_song_request(song_path,index):
+func _on_song_request(song_path,prev_index,new_index):
 	print("In main song path that was requested = ", song_path)
 	var stream = load_mp3(song_path)
 	$AudioStreamPlayer.stream = stream
 	$AudioStreamPlayer.playing = true
-	current_song_idx = index
+	current_song_idx = new_index
 	
 	
 func load_mp3(path):
@@ -89,7 +89,11 @@ func _on_timer_timeout():
 func _on_audio_stream_player_finished():
 	#play next in list
 	if current_song_idx < mp3_list.size() - 1 and current_song_idx >= 0:
-		EventBus.song_request.emit(mp3_list[current_song_idx+1],current_song_idx+1)
+		var next_index = current_song_idx + 1
+		var current_index = current_song_idx
+		# ERMM This is awkaward, had issue when sending current_song_idx to signal it
+		# would already be updated by main by the time it got to file list
+		EventBus.song_request.emit(mp3_list[current_song_idx+1],current_index,next_index)
 	else:
 		print("Reached final song")
 	

@@ -11,6 +11,8 @@ extends Control
 @onready var TimeLeftLabel: Label = $HBoxContainer/VBoxContainer2/Scrubber/TimeLeftLabel
 @onready var PlayPauseButton: MaterialButton = $HBoxContainer/VBoxContainer2/Controls/PlayPauseButton
 
+var button_list: Array[Button]
+var song_index = -1
 func _ready():
 	EventBus.set_playback_position.connect(_on_set_playback_position)
 	EventBus.song_request.connect(song_changed)
@@ -25,6 +27,7 @@ func add_list_of_files(list):
 		var filepath: String = list[i]
 		var filename = filepath.split("/",true)[-1]
 		var new_button = Button.new()
+		button_list.append(new_button)
 		new_button.text = filename
 		new_button.set_meta("path",filepath)
 		new_button.set_meta("index",i)
@@ -34,10 +37,13 @@ func add_list_of_files(list):
 func play_song(button):
 	PlayPauseButton.text = "󰏤"
 	EventBus.play.emit()
-	EventBus.song_request.emit(button.get_meta("path"),button.get_meta("index"))
+	EventBus.song_request.emit(button.get_meta("path"),song_index,button.get_meta("index"))
 	
-func song_changed(path,index):
+func song_changed(path,prev_index,new_index):
 	%SongName.text = path.split("/",true)[-1]
+	button_list[prev_index].modulate = Color.WHITE
+	button_list[new_index].modulate = Color.GREEN
+	song_index = new_index
 	
 func _on_reverb_check_box_toggled(toggled_on):
 	EventBus.set_reverb.emit(toggled_on)
