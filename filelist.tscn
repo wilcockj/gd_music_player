@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjhx883qcvbi1"]
+[gd_scene load_steps=9 format=3 uid="uid://cjhx883qcvbi1"]
 
 [ext_resource type="Script" path="res://filelist.gd" id="1_825yq"]
-[ext_resource type="Texture2D" uid="uid://5jf1srlo68mb" path="res://tempalbumart.png" id="2_a0ggw"]
+[ext_resource type="Theme" uid="uid://fk3h2ypd21ic" path="res://assets/themes/main_theme.tres" id="1_r21w7"]
+[ext_resource type="FontFile" uid="uid://r6o61b6yhw6w" path="res://assets/fonts/SpaceMono-Bold.ttf" id="3_6el5d"]
+[ext_resource type="FontFile" uid="uid://bg7oys2cgqpao" path="res://addons/material-design-icons/fonts/material_design_icons.ttf" id="4_15vpq"]
+[ext_resource type="Script" path="res://addons/material-design-icons/nodes/MaterialButton.gd" id="5_00kdk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qmn3"]
 corner_radius_top_left = 200
@@ -12,6 +15,8 @@ corner_detail = 20
 
 [sub_resource type="Theme" id="Theme_015xr"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iel42"]
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -19,6 +24,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_r21w7")
 script = ExtResource("1_825yq")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -49,23 +55,77 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_015xr")
-texture = ExtResource("2_a0ggw")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-
-[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer2/HBoxContainer"]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-
-[node name="SongName" type="Label" parent="HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="SongName" type="Label" parent="HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_6el5d")
+theme_override_font_sizes/font_size = 25
 text = "asdasdasdd"
+horizontal_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer/VBoxContainer2"]
+[node name="Scrubber" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
 layout_mode = 2
+
+[node name="CurrentTimeLabel" type="Label" parent="HBoxContainer/VBoxContainer2/Scrubber"]
+layout_mode = 2
+text = "0:00"
+vertical_alignment = 1
+
+[node name="ScrubberSlider" type="HSlider" parent="HBoxContainer/VBoxContainer2/Scrubber"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+step = 0.01
+value = 20.0
+scrollable = false
+tick_count = 2
+
+[node name="TimeLeftLabel" type="Label" parent="HBoxContainer/VBoxContainer2/Scrubber"]
+layout_mode = 2
+text = "-0:00"
+
+[node name="Controls" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer2/Controls"]
+custom_minimum_size = Vector2(70, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_15vpq")
+theme_override_font_sizes/font_size = 32
+text = "󰒫"
+flat = true
+script = ExtResource("5_00kdk")
+icon_name = "skip-backward"
+icon_size = 32
+
+[node name="PlayPauseButton" type="Button" parent="HBoxContainer/VBoxContainer2/Controls"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_15vpq")
+theme_override_font_sizes/font_size = 32
+text = "󰏤"
+flat = true
+script = ExtResource("5_00kdk")
+icon_name = "pause"
+icon_size = 32
+
+[node name="ForwardButton" type="Button" parent="HBoxContainer/VBoxContainer2/Controls"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_15vpq")
+theme_override_font_sizes/font_size = 32
+text = "󰒬"
+flat = true
+script = ExtResource("5_00kdk")
+icon_name = "skip-forward"
+icon_size = 32
+
+[node name="BottomPad" type="Panel" parent="HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(2.08165e-12, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_iel42")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -141,6 +201,7 @@ size_flags_vertical = 3
 [node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/Controls/PlayPauseButton" to="." method="_on_play_pause_button_pressed"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/Pitch/PitchSlider" to="." method="_on_pitch_slider_value_changed"]
 [connection signal="toggled" from="HBoxContainer/VBoxContainer/Reverb/ReverbCheckBox" to="." method="_on_reverb_check_box_toggled"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]

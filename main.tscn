@@ -29,7 +29,7 @@ autoplay = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.1
 autostart = true
 
 [connection signal="dir_selected" from="FileDialog" to="." method="_on_file_dialog_dir_selected"]

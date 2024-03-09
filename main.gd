@@ -2,12 +2,17 @@ extends Node2D
 
 var mp3_list: Array[String]
 var current_song_idx = -1
+
 @onready var Player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var filelist: PackedScene = load("res://filelist.tscn")
-# Called when the node enters the scene tree for the first time.
+
+
 func _ready():
 	EventBus.song_request.connect(_on_song_request)
 	EventBus.set_reverb.connect(_on_set_reverb)
+	EventBus.play.connect(_on_play)
+	EventBus.pause.connect(_on_pause)
+	
 	OS.get_name()
 	if OS.get_name() == "Android":
 		%FileDialog.root_subfolder = "/storage/emulated/0/"
@@ -15,12 +20,12 @@ func _ready():
 		%FileDialog.root_subfolder = "/Users/"
 	if OS.get_name() == "Linux":
 		%FileDialog.root_subfolder = "/home"
-	#get_tree().create_timer(1).timeout.connect(func():$AudioStreamPlayer.playing = true)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_play():
+	Player.stream_paused = false
 	
+func _on_pause():
+	Player.stream_paused = true
 	
 func _on_set_reverb(onoff):
 	AudioServer.set_bus_effect_enabled(0, 0, onoff)
@@ -47,7 +52,6 @@ func _on_file_dialog_dir_selected(dir):
 	print(dir)
 	var fs = DirAccess.open(dir)
 	explore_dir(fs)
-	#print(mp3_list)
 	var list = filelist.instantiate()
 	get_tree().root.add_child(list)
 	list.add_list_of_files(mp3_list)
@@ -72,7 +76,7 @@ func _on_timer_timeout():
 		var pos = Player.get_playback_position()
 		var len = Player.stream.get_length()
 		EventBus.set_playback_position.emit(pos, len)
-	$Timer.start(0.1)
+	$Timer.start(0.5)
 
 
 func _on_audio_stream_player_finished():
