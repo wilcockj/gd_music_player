@@ -61,7 +61,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_6el5d")
 theme_override_font_sizes/font_size = 25
-text = "asdasdasdd"
+text = "No Song  Playing"
 horizontal_alignment = 1
 
 [node name="Scrubber" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
