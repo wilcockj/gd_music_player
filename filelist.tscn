@@ -77,7 +77,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 step = 0.01
-value = 20.0
 scrollable = false
 tick_count = 2
 
@@ -201,6 +200,7 @@ size_flags_vertical = 3
 [node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 
+[connection signal="drag_ended" from="HBoxContainer/VBoxContainer2/Scrubber/ScrubberSlider" to="." method="_on_scrubber_slider_drag_ended"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/Controls/PlayPauseButton" to="." method="_on_play_pause_button_pressed"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/Pitch/PitchSlider" to="." method="_on_pitch_slider_value_changed"]
 [connection signal="toggled" from="HBoxContainer/VBoxContainer/Reverb/ReverbCheckBox" to="." method="_on_reverb_check_box_toggled"]

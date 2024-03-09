@@ -6,3 +6,4 @@ signal set_reverb(onoff)
 signal set_playback_position(pos, len)
 signal play
 signal pause
+signal scrub_to_percent(percent)

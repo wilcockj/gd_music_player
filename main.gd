@@ -12,6 +12,7 @@ func _ready():
 	EventBus.set_reverb.connect(_on_set_reverb)
 	EventBus.play.connect(_on_play)
 	EventBus.pause.connect(_on_pause)
+	EventBus.scrub_to_percent.connect(_on_scrub_to_percent)
 	
 	OS.get_name()
 	if OS.get_name() == "Android":
@@ -20,6 +21,11 @@ func _ready():
 		%FileDialog.root_subfolder = "/Users/"
 	if OS.get_name() == "Linux":
 		%FileDialog.root_subfolder = "/home"
+
+func _on_scrub_to_percent(percent):
+	var len = Player.stream.get_length()
+	var pos = len * percent
+	Player.play(pos)
 
 func _on_play():
 	Player.stream_paused = false

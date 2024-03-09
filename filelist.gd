@@ -55,3 +55,7 @@ func _on_play_pause_button_pressed():
 	else:
 		PlayPauseButton.text = "󰐊"
 		EventBus.pause.emit()
+
+func _on_scrubber_slider_drag_ended(value_changed):
+	if value_changed:
+		EventBus.scrub_to_percent.emit(ScrubberSlider.value / 100.0)
