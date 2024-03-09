@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjhx883qcvbi1"]
+[gd_scene load_steps=10 format=3 uid="uid://cjhx883qcvbi1"]
 
 [ext_resource type="Script" path="res://filelist.gd" id="1_825yq"]
 [ext_resource type="Theme" uid="uid://fk3h2ypd21ic" path="res://assets/themes/main_theme.tres" id="1_r21w7"]
+[ext_resource type="Texture2D" uid="uid://5jf1srlo68mb" path="res://tempalbumart.png" id="2_a0ggw"]
 [ext_resource type="FontFile" uid="uid://r6o61b6yhw6w" path="res://assets/fonts/SpaceMono-Bold.ttf" id="3_6el5d"]
 [ext_resource type="FontFile" uid="uid://bg7oys2cgqpao" path="res://addons/material-design-icons/fonts/material_design_icons.ttf" id="4_15vpq"]
 [ext_resource type="Script" path="res://addons/material-design-icons/nodes/MaterialButton.gd" id="5_00kdk"]
@@ -55,13 +56,14 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_015xr")
+texture = ExtResource("2_a0ggw")
 
 [node name="SongName" type="Label" parent="HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_6el5d")
 theme_override_font_sizes/font_size = 25
-text = "asdasdasdd"
+text = "No Song  Playing"
 horizontal_alignment = 1
 
 [node name="Scrubber" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]

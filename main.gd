@@ -86,9 +86,8 @@ func _on_timer_timeout():
 
 
 func _on_audio_stream_player_finished():
-	pass # Replace with function body.
 	#play next in list
-	if current_song_idx < mp3_list.size() - 1:
+	if current_song_idx < mp3_list.size() - 1 and current_song_idx >= 0:
 		EventBus.song_request.emit(mp3_list[current_song_idx+1],current_song_idx+1)
 	else:
 		print("Reached final song")
