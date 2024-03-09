@@ -10,7 +10,7 @@ extends Control
 @onready var ScrubberSlider: HSlider = $HBoxContainer/VBoxContainer2/Scrubber/ScrubberSlider
 @onready var TimeLeftLabel: Label = $HBoxContainer/VBoxContainer2/Scrubber/TimeLeftLabel
 @onready var PlayPauseButton: MaterialButton = $HBoxContainer/VBoxContainer2/Controls/PlayPauseButton
-@onready var AlbumArt := $HBoxContainer/VBoxContainer2/Panel2/TextureRect
+@onready var AlbumArt := $HBoxContainer/VBoxContainer2/MarginContainer/Panel2/TextureRect
 @onready var SongName := $HBoxContainer/VBoxContainer2/SongName
 @onready var ArtistName := $HBoxContainer/VBoxContainer2/ArtistName
 
@@ -22,7 +22,8 @@ func _ready():
 	EventBus.metadata_received.connect(_on_metadata_received)
 
 func _on_metadata_received(meta: MusicMeta.MusicMetadata):
-	AlbumArt.texture = meta.cover
+	if meta.cover:
+		AlbumArt.texture = meta.cover
 	SongName.text = meta.title if meta.title else "NO DATA FOUND"
 	ArtistName.text = meta.album if meta.album else "NO DATA FOUND"
 

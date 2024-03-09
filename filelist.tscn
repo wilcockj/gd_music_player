@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjhx883qcvbi1"]
+[gd_scene load_steps=9 format=3 uid="uid://cjhx883qcvbi1"]
 
 [ext_resource type="Script" path="res://filelist.gd" id="1_825yq"]
 [ext_resource type="Theme" uid="uid://fk3h2ypd21ic" path="res://assets/themes/main_theme.tres" id="1_r21w7"]
@@ -8,13 +8,11 @@
 [ext_resource type="Script" path="res://addons/material-design-icons/nodes/MaterialButton.gd" id="5_00kdk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qmn3"]
-corner_radius_top_left = 200
-corner_radius_top_right = 200
-corner_radius_bottom_right = 200
-corner_radius_bottom_left = 200
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
 corner_detail = 20
-
-[sub_resource type="Theme" id="Theme_015xr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iel42"]
 
@@ -40,14 +38,22 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel2" type="Panel" parent="HBoxContainer/VBoxContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Panel2" type="Panel" parent="HBoxContainer/VBoxContainer2/MarginContainer"]
 clip_children = 1
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_3qmn3")
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/Panel2"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/MarginContainer/Panel2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,7 +61,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-theme = SubResource("Theme_015xr")
 texture = ExtResource("2_a0ggw")
 
 [node name="SongName" type="Label" parent="HBoxContainer/VBoxContainer2"]
