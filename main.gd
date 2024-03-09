@@ -28,8 +28,8 @@ func _on_change_playback_speed(value):
 
 func _on_scrub_to_percent(percent):
 	print("time to scrub")
-	var len = Player.stream.get_length()
-	var pos = len * percent
+	var length = Player.stream.get_length()
+	var pos = length * percent
 	Player.play(pos)
 
 func _on_play():
@@ -40,7 +40,6 @@ func _on_pause():
 	
 func _on_set_reverb(onoff):
 	AudioServer.set_bus_effect_enabled(0, 0, onoff)
-	
 
 func explore_dir(dir):
 	if dir:
@@ -68,7 +67,7 @@ func _on_file_dialog_dir_selected(dir):
 	list.add_list_of_files(mp3_list)
 
 
-func _on_song_request(song_path,prev_index,new_index):
+func _on_song_request(song_path,_prev_index,new_index):
 	print("In main song path that was requested = ", song_path)
 	var stream = load_mp3(song_path)
 	$AudioStreamPlayer.stream = stream
@@ -87,8 +86,8 @@ func load_mp3(path):
 func _on_timer_timeout():
 	if Player.playing:
 		var pos = Player.get_playback_position()
-		var len = Player.stream.get_length()
-		EventBus.set_playback_position.emit(pos, len)
+		var length = Player.stream.get_length()
+		EventBus.set_playback_position.emit(pos, length)
 	$Timer.start(0.5)
 
 

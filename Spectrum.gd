@@ -20,12 +20,11 @@ func _ready():
 	average_magnitudes.resize(VU_COUNT)
 	average_magnitudes.fill(0.0)
 
-func _process(delta):
+func _process(_delta):
 	queue_redraw()
 	update_average_magnitudes()
 
 func update_average_magnitudes():
-	var w = WIDTH / VU_COUNT
 	var prev_hz = 0.0
 	for i in range(1, VU_COUNT + 1):
 		var hz = i * FREQ_MAX / VU_COUNT

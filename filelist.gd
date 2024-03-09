@@ -71,7 +71,7 @@ func play_song(button):
 	EventBus.play.emit()
 	EventBus.song_request.emit(button.get_meta("path"),song_index,button.get_meta("index"))
 	
-func song_changed(path,prev_index,new_index):
+func song_changed(_path,prev_index,new_index):
 	#SongName.text = path.split("/",true)[-1]
 	button_list[prev_index].modulate = Color.WHITE
 	button_list[new_index].modulate = Color.GREEN
@@ -105,7 +105,7 @@ func _on_scrubber_slider_drag_ended(value_changed):
 	if value_changed:
 		EventBus.scrub_to_percent.emit(ScrubberSlider.value / 100.0)
 
-func _on_scrubber_slider_value_changed(value):
+func _on_scrubber_slider_value_changed(_value):
 	$HBoxContainer/VBoxContainer2/Scrubber/ScrubberChangedTimer.start()
 
 func _on_scrubber_changed_timer_timeout():
