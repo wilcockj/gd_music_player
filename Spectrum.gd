@@ -1,16 +1,22 @@
 extends Node2D
 
-const VU_COUNT = 16
-const FREQ_MAX = 11050.0
+const VU_COUNT = 128
 
-const WIDTH = 400
-const HEIGHT = 100
+const FREQ_MAX = 11050.0
 
 const MIN_DB = 60
 const SMOOTHING = 0.5  # Adjust this value to control the smoothing effect
 
 var spectrum
+
 var average_magnitudes: PackedFloat32Array # Initialize with zeros
+
+
+
+
+var WIDTH
+var HEIGHT
+
 
 func _ready():
 	spectrum = AudioServer.get_bus_effect_instance(0, 2)
@@ -32,6 +38,8 @@ func update_average_magnitudes():
 		prev_hz = hz
 
 func _draw():
+	WIDTH = get_parent().size.x
+	HEIGHT = get_parent().size.y
 	var w = WIDTH / VU_COUNT
 	for i in range(VU_COUNT):
 		var magnitude = average_magnitudes[i]
