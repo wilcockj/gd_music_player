@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://bg7oy2tc6c04e"]
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://bg7oy2tc6c04e"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_dr85l"]
 resource_name = "Reverb"
@@ -6,9 +6,14 @@ resource_name = "Reverb"
 [sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_vfox8"]
 resource_name = "PitchShift"
 
+[sub_resource type="AudioEffectSpectrumAnalyzer" id="AudioEffectSpectrumAnalyzer_j1yi8"]
+resource_name = "SpectrumAnalyzer"
+
 [resource]
 bus/0/volume_db = -0.228265
 bus/0/effect/0/effect = SubResource("AudioEffectReverb_dr85l")
 bus/0/effect/0/enabled = false
 bus/0/effect/1/effect = SubResource("AudioEffectPitchShift_vfox8")
 bus/0/effect/1/enabled = true
+bus/0/effect/2/effect = SubResource("AudioEffectSpectrumAnalyzer_j1yi8")
+bus/0/effect/2/enabled = true

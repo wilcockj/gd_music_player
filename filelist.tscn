@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjhx883qcvbi1"]
+[gd_scene load_steps=10 format=3 uid="uid://cjhx883qcvbi1"]
 
 [ext_resource type="Script" path="res://filelist.gd" id="1_825yq"]
 [ext_resource type="Theme" uid="uid://fk3h2ypd21ic" path="res://assets/themes/main_theme.tres" id="1_r21w7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bvei72lwd33qp" path="res://assets/images/tmp_art.tres" id="3_gk44b"]
 [ext_resource type="FontFile" uid="uid://bg7oys2cgqpao" path="res://addons/material-design-icons/fonts/material_design_icons.ttf" id="4_15vpq"]
 [ext_resource type="Script" path="res://addons/material-design-icons/nodes/MaterialButton.gd" id="5_00kdk"]
+[ext_resource type="Script" path="res://Spectrum.gd" id="7_gfv6v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qmn3"]
 corner_radius_top_left = 75
@@ -215,6 +216,13 @@ size_flags_vertical = 3
 
 [node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 200)
+layout_mode = 2
+
+[node name="Spectrum" type="Node2D" parent="HBoxContainer/VBoxContainer/Panel"]
+script = ExtResource("7_gfv6v")
 
 [connection signal="drag_ended" from="HBoxContainer/VBoxContainer2/Scrubber/ScrubberSlider" to="." method="_on_scrubber_slider_drag_ended"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/Controls/PlayPauseButton" to="." method="_on_play_pause_button_pressed"]
