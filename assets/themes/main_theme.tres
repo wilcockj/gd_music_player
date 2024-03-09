@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://fk3h2ypd21ic"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://fk3h2ypd21ic"]
 
 [ext_resource type="FontFile" uid="uid://bb31oeasnndwa" path="res://assets/fonts/SpaceMono-Regular.ttf" id="1_4407h"]
 
@@ -16,6 +16,12 @@ height = 15
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xvt5g"]
 bg_color = Color(0.360784, 0.686275, 0.407843, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y2544"]
+bg_color = Color(1, 1, 1, 0.101961)
+border_width_top = 2
+border_color = Color(0.8, 0.8, 0.8, 0.470588)
+expand_margin_bottom = 9.0
+
 [resource]
 default_font = ExtResource("1_4407h")
 Button/styles/focus = SubResource("StyleBoxEmpty_dox3d")
@@ -24,3 +30,4 @@ HSlider/icons/grabber_disabled = SubResource("GradientTexture2D_ntv2h")
 HSlider/icons/grabber_highlight = SubResource("GradientTexture2D_ntv2h")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_xvt5g")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_xvt5g")
+HSlider/styles/slider = SubResource("StyleBoxFlat_y2544")

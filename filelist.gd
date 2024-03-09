@@ -1,13 +1,11 @@
 extends Control
 
-
 @onready var PitchLabel: Label = $HBoxContainer/VBoxContainer/Pitch/PitchLabel
 @onready var VolumeLabel: Label = $HBoxContainer/VBoxContainer/Volume/VolumeLabel
 @onready var CurrentTimeLabel: Label = $HBoxContainer/VBoxContainer2/Scrubber/CurrentTimeLabel
 @onready var ScrubberSlider: HSlider = $HBoxContainer/VBoxContainer2/Scrubber/ScrubberSlider
 @onready var TimeLeftLabel: Label = $HBoxContainer/VBoxContainer2/Scrubber/TimeLeftLabel
 @onready var PlayPauseButton: MaterialButton = $HBoxContainer/VBoxContainer2/Controls/PlayPauseButton
-
 
 func _ready():
 	EventBus.set_playback_position.connect(_on_set_playback_position)
