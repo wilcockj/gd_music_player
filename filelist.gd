@@ -105,15 +105,11 @@ func _on_scrubber_slider_drag_ended(value_changed):
 	if value_changed:
 		EventBus.scrub_to_percent.emit(ScrubberSlider.value / 100.0)
 
-
 func _on_scrubber_slider_value_changed(value):
 	$HBoxContainer/VBoxContainer2/Scrubber/ScrubberChangedTimer.start()
-	
-
 
 func _on_scrubber_changed_timer_timeout():
 	EventBus.scrub_to_percent.emit(ScrubberSlider.value / 100.0)
-
 
 func _on_play_back_slider_value_changed(value):
 	PlayBackLabel.text = "%.01fx"%value
