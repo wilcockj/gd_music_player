@@ -1,12 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjhx883qcvbi1"]
+[gd_scene load_steps=13 format=3 uid="uid://cjhx883qcvbi1"]
 
 [ext_resource type="Script" path="res://filelist.gd" id="1_825yq"]
 [ext_resource type="Theme" uid="uid://fk3h2ypd21ic" path="res://assets/themes/main_theme.tres" id="1_r21w7"]
 [ext_resource type="FontFile" uid="uid://r6o61b6yhw6w" path="res://assets/fonts/SpaceMono-Bold.ttf" id="3_6el5d"]
 [ext_resource type="Texture2D" uid="uid://bvei72lwd33qp" path="res://assets/images/tmp_art.tres" id="3_gk44b"]
+[ext_resource type="Shader" path="res://assets/shaders/blur.gdshader" id="3_t1g5v"]
 [ext_resource type="FontFile" uid="uid://bg7oys2cgqpao" path="res://addons/material-design-icons/fonts/material_design_icons.ttf" id="4_15vpq"]
 [ext_resource type="Script" path="res://addons/material-design-icons/nodes/MaterialButton.gd" id="5_00kdk"]
 [ext_resource type="Script" path="res://Spectrum.gd" id="7_gfv6v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a47aa"]
+shader = ExtResource("3_t1g5v")
+shader_parameter/lod = 6.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qmn3"]
 corner_radius_top_left = 75
@@ -32,6 +37,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_r21w7")
 script = ExtResource("1_825yq")
+
+[node name="BGImage" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="Panel" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_a47aa")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

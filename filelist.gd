@@ -4,6 +4,9 @@ extends Control
 # require press and release on button to play if
 # press and drag should scroll
 
+@export var SPIN_SPEED: float = 0.5
+@export var BG_SCALE: float = 2.5
+
 @onready var PitchLabel: Label = %PitchLabel
 @onready var VolumeLabel: Label = %VolumeLabel
 @onready var CurrentTimeLabel: Label = %CurrentTimeLabel
@@ -13,11 +16,16 @@ extends Control
 @onready var AlbumArt := %AlbumArt
 @onready var SongName := %SongName
 @onready var ArtistName := %ArtistName
+@onready var BGImage := %BGImage
 
 @onready var tmp_art = load("res://assets/images/tmp_art.tres")
 
 var button_list: Array[Button]
 var song_index = -1
+
+func _process(delta):
+	BGImage.pivot_offset = BGImage.size / 2
+	BGImage.rotation += SPIN_SPEED * delta
 
 func _ready():
 	EventBus.set_playback_position.connect(_on_set_playback_position)
@@ -29,9 +37,16 @@ func _on_metadata_received(meta: MusicMeta.MusicMetadata, file_path):
 		AlbumArt.texture = meta.cover
 	else:
 		AlbumArt.texture = tmp_art
+	set_background(AlbumArt.texture)
 		
 	SongName.text = meta.title if meta.title else file_path.split("/")[-1]
 	ArtistName.text = meta.artist if meta.artist else "Unknown Artist"
+
+func set_background(texture):
+	BGImage.texture = texture
+	BGImage.size = DisplayServer.window_get_size() * BG_SCALE
+	BGImage.position = Vector2.ZERO
+	BGImage.position -= DisplayServer.window_get_size() * (BG_SCALE / 4)
 
 func _on_set_playback_position(pos, length):
 	CurrentTimeLabel.text = "%d:%02d"%[int(floor(pos / 60.0)), int(pos) % 60]
