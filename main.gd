@@ -10,6 +10,9 @@ var current_song_idx = -1
 func _ready():
 	EventBus.song_request.connect(_on_song_request)
 	EventBus.set_reverb.connect(_on_set_reverb)
+	EventBus.play.connect(_on_play)
+	EventBus.pause.connect(_on_pause)
+	
 	OS.get_name()
 	if OS.get_name() == "Android":
 		%FileDialog.root_subfolder = "/storage/emulated/0/"
@@ -18,10 +21,11 @@ func _ready():
 	if OS.get_name() == "Linux":
 		%FileDialog.root_subfolder = "/home"
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_play():
+	Player.stream_paused = false
 	
+func _on_pause():
+	Player.stream_paused = true
 	
 func _on_set_reverb(onoff):
 	AudioServer.set_bus_effect_enabled(0, 0, onoff)

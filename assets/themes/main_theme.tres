@@ -1,6 +1,8 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://fk3h2ypd21ic"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://fk3h2ypd21ic"]
 
 [ext_resource type="FontFile" uid="uid://bb31oeasnndwa" path="res://assets/fonts/SpaceMono-Regular.ttf" id="1_4407h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dox3d"]
 
 [sub_resource type="Gradient" id="Gradient_yu4co"]
 offsets = PackedFloat32Array(1)
@@ -16,6 +18,9 @@ bg_color = Color(0.360784, 0.686275, 0.407843, 1)
 
 [resource]
 default_font = ExtResource("1_4407h")
+Button/styles/focus = SubResource("StyleBoxEmpty_dox3d")
 HSlider/icons/grabber = SubResource("GradientTexture2D_ntv2h")
 HSlider/icons/grabber_disabled = SubResource("GradientTexture2D_ntv2h")
+HSlider/icons/grabber_highlight = SubResource("GradientTexture2D_ntv2h")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_xvt5g")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_xvt5g")
