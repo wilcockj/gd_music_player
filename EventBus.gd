@@ -7,5 +7,6 @@ signal set_playback_position(pos, len)
 signal play
 signal pause
 signal scrub_to_percent(percent)
+signal change_playback_speed(value)
 
 signal metadata_received(meta: MusicMeta.MusicMetadata, song_path)

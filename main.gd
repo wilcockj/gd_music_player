@@ -13,6 +13,7 @@ func _ready():
 	EventBus.play.connect(_on_play)
 	EventBus.pause.connect(_on_pause)
 	EventBus.scrub_to_percent.connect(_on_scrub_to_percent)
+	EventBus.change_playback_speed.connect(_on_change_playback_speed)
 	
 	OS.get_name()
 	if OS.get_name() == "Android":
@@ -21,6 +22,9 @@ func _ready():
 		%FileDialog.root_subfolder = "/Users/"
 	if OS.get_name() == "Linux":
 		%FileDialog.root_subfolder = "/home"
+
+func _on_change_playback_speed(value):
+	Player.pitch_scale = value
 
 func _on_scrub_to_percent(percent):
 	print("time to scrub")

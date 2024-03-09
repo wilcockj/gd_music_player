@@ -14,7 +14,7 @@ shader = ExtResource("3_t1g5v")
 shader_parameter/lod = 6.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rf7xp"]
-bg_color = Color(0, 0, 0, 0.2)
+bg_color = Color(0, 0, 0, 0.298039)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qmn3"]
 corner_radius_top_left = 75
@@ -225,6 +225,27 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "1.0"
 
+[node name="PlaybackSpeed" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/PlaybackSpeed"]
+layout_mode = 2
+text = "Playback Speed:"
+
+[node name="PlayBackSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/PlaybackSpeed"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 0.25
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="PlayBackLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/PlaybackSpeed"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1x"
+
 [node name="Reverb" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -280,5 +301,6 @@ script = ExtResource("7_gfv6v")
 [connection signal="drag_ended" from="MarginContainer/HBoxContainer/VBoxContainer2/Scrubber/ScrubberSlider" to="." method="_on_scrubber_slider_drag_ended"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/Controls/PlayPauseButton" to="." method="_on_play_pause_button_pressed"]
 [connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/Pitch/PitchSlider" to="." method="_on_pitch_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/PlaybackSpeed/PlayBackSlider" to="." method="_on_play_back_slider_value_changed"]
 [connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer/Reverb/ReverbCheckBox" to="." method="_on_reverb_check_box_toggled"]
 [connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]

@@ -17,6 +17,7 @@ extends Control
 @onready var SongName := %SongName
 @onready var ArtistName := %ArtistName
 @onready var BGImage := %BGImage
+@onready var PlayBackLabel := %PlayBackLabel
 
 @onready var tmp_art = load("res://assets/images/tmp_art.tres")
 
@@ -112,3 +113,8 @@ func _on_scrubber_slider_value_changed(value):
 
 func _on_scrubber_changed_timer_timeout():
 	EventBus.scrub_to_percent.emit(ScrubberSlider.value / 100.0)
+
+
+func _on_play_back_slider_value_changed(value):
+	PlayBackLabel.text = "%.01fx"%value
+	EventBus.change_playback_speed.emit(value)
