@@ -18,19 +18,20 @@ extends Control
 
 var button_list: Array[Button]
 var song_index = -1
+
 func _ready():
 	EventBus.set_playback_position.connect(_on_set_playback_position)
 	EventBus.song_request.connect(song_changed)
 	EventBus.metadata_received.connect(_on_metadata_received)
 
-func _on_metadata_received(meta: MusicMeta.MusicMetadata):
+func _on_metadata_received(meta: MusicMeta.MusicMetadata, file_path):
 	if meta.cover:
 		AlbumArt.texture = meta.cover
 	else:
 		AlbumArt.texture = tmp_art
 		
-	SongName.text = meta.title if meta.title else "NO DATA FOUND"
-	ArtistName.text = meta.album if meta.album else "NO DATA FOUND"
+	SongName.text = meta.title if meta.title else file_path.split("/")[-1]
+	ArtistName.text = meta.artist if meta.artist else "Unknown Artist"
 
 func _on_set_playback_position(pos, length):
 	CurrentTimeLabel.text = "%d:%02d"%[int(floor(pos / 60.0)), int(pos) % 60]

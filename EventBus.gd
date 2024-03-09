@@ -8,4 +8,4 @@ signal play
 signal pause
 signal scrub_to_percent(percent)
 
-signal metadata_received(meta: MusicMeta.MusicMetadata)
+signal metadata_received(meta: MusicMeta.MusicMetadata, song_path)
