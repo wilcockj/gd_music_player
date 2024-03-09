@@ -3,16 +3,19 @@ extends Control
 
 @onready var PitchLabel: Label = $HBoxContainer/VBoxContainer/Pitch/PitchLabel
 @onready var VolumeLabel: Label = $HBoxContainer/VBoxContainer/Volume/VolumeLabel
-func _on_set_playback_position(pos, length):
-	$HBoxContainer/VBoxContainer2/ProgressBar.value = (pos / length) * 100
+@onready var CurrentTimeLabel: Label = $HBoxContainer/VBoxContainer2/Scrubber/CurrentTimeLabel
+@onready var ScrubberSlider: HSlider = $HBoxContainer/VBoxContainer2/Scrubber/ScrubberSlider
+@onready var TimeLeftLabel: Label = $HBoxContainer/VBoxContainer2/Scrubber/TimeLeftLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	EventBus.set_playback_position.connect(_on_set_playback_position)
 	EventBus.song_request.connect(song_changed)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+
+func _on_set_playback_position(pos, length):
+	CurrentTimeLabel.text = "%d:%02d"%[int(floor(pos / 60.0)), int(pos) % 60]
+	ScrubberSlider.value = (pos / length) * 100
+	TimeLeftLabel.text = "-%d:%02d"%[int(floor((length - pos) / 60.0)), int(length - pos) % 60]
 
 func add_list_of_files(list):
 	for i in list.size():
@@ -48,6 +51,5 @@ func _on_volume_slider_value_changed(value):
 	#(-80-0)
 	var new_volume_db = remap(value,0,100,-40,0)
 	AudioServer.set_bus_volume_db(0,new_volume_db)
-	print("Set volume to " + str(new_volume_db))
 	VolumeLabel.text = str(value) + "%"
 	

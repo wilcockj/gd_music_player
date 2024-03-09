@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cjhx883qcvbi1"]
 
 [ext_resource type="Script" path="res://filelist.gd" id="1_825yq"]
-[ext_resource type="Texture2D" uid="uid://5jf1srlo68mb" path="res://tempalbumart.png" id="2_a0ggw"]
+[ext_resource type="Theme" uid="uid://fk3h2ypd21ic" path="res://assets/themes/main_theme.tres" id="1_r21w7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qmn3"]
 corner_radius_top_left = 200
@@ -19,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_r21w7")
 script = ExtResource("1_825yq")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -49,7 +50,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_015xr")
-texture = ExtResource("2_a0ggw")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -64,8 +64,25 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "asdasdasdd"
 
-[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer/VBoxContainer2"]
+[node name="Scrubber" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
 layout_mode = 2
+
+[node name="CurrentTimeLabel" type="Label" parent="HBoxContainer/VBoxContainer2/Scrubber"]
+layout_mode = 2
+text = "0:00"
+vertical_alignment = 1
+
+[node name="ScrubberSlider" type="HSlider" parent="HBoxContainer/VBoxContainer2/Scrubber"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+step = 0.01
+editable = false
+scrollable = false
+
+[node name="TimeLeftLabel" type="Label" parent="HBoxContainer/VBoxContainer2/Scrubber"]
+layout_mode = 2
+text = "-0:00"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
