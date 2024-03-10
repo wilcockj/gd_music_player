@@ -45,7 +45,7 @@ func _on_metadata_received(meta: MusicMeta.MusicMetadata, file_path):
 	ArtistName.text = "%s - %s (%s)"%[
 		meta.artist if meta.artist else "Unknown Artist",
 		meta.album if meta.artist else "Unknow Album",
-		meta.year if meta.year else "????"
+		meta.year if meta.year else 0
 	]
 
 func set_background(texture):
