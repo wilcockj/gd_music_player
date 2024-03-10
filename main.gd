@@ -42,6 +42,7 @@ func _on_set_reverb(onoff):
 	AudioServer.set_bus_effect_enabled(0, 0, onoff)
 
 func explore_dir(dir):
+	'''
 	if dir:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
@@ -57,6 +58,23 @@ func explore_dir(dir):
 				if file_name.get_extension() == "mp3":
 					mp3_list.append(dir.get_current_dir() + "/" + file_name)
 			file_name = dir.get_next()
+	'''
+	
+	if not dir:
+		return		
+	var files = dir.get_files()
+	var dirs = dir.get_directories()
+	for file in files:
+		print("Found file: " + file)
+		if file.get_extension() == "mp3":
+			mp3_list.append(dir.get_current_dir() + "/" + file)
+	for cur_dir in dirs:
+		print("Found directory: " + cur_dir)
+		var new_dir = dir.get_current_dir() + "/" + cur_dir
+		print("new dir: " + new_dir)
+		var fs = DirAccess.open(new_dir)
+		explore_dir(fs)
+	
 
 func _on_file_dialog_dir_selected(dir):
 	print(dir)
