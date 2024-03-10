@@ -1,6 +1,6 @@
 extends Node2D
 
-const VU_COUNT = 4096
+const VU_COUNT = 1024
 
 const FREQ_MAX = 11050.0
 
