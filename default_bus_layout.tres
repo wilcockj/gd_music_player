@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://bg7oy2tc6c04e"]
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://bg7oy2tc6c04e"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_dr85l"]
 resource_name = "Reverb"
@@ -12,6 +12,10 @@ resource_name = "PitchShift"
 [sub_resource type="AudioEffectSpectrumAnalyzer" id="AudioEffectSpectrumAnalyzer_j1yi8"]
 resource_name = "SpectrumAnalyzer"
 
+[sub_resource type="AudioEffectEQ10" id="AudioEffectEQ10_uhwab"]
+resource_name = "EQ10"
+band_db/31_hz = 3.33067e-15
+
 [resource]
 bus/0/volume_db = -0.228265
 bus/0/effect/0/effect = SubResource("AudioEffectReverb_dr85l")
@@ -20,3 +24,5 @@ bus/0/effect/1/effect = SubResource("AudioEffectPitchShift_vfox8")
 bus/0/effect/1/enabled = true
 bus/0/effect/2/effect = SubResource("AudioEffectSpectrumAnalyzer_j1yi8")
 bus/0/effect/2/enabled = true
+bus/0/effect/3/effect = SubResource("AudioEffectEQ10_uhwab")
+bus/0/effect/3/enabled = true

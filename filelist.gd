@@ -20,6 +20,7 @@ extends Control
 @onready var PlayBackLabel := %PlayBackLabel
 @onready var SearchBar := %SearchBar
 @onready var FileDisplayVBox := %FileDisplayVbox
+@onready var EQOption := %EQOption
 
 @onready var tmp_art = load("res://assets/images/tmp_art.tres")
 @onready var MusicButton: PackedScene = load("res://scenes/ui/music_button.tscn")
@@ -35,6 +36,9 @@ func _ready():
 	EventBus.set_playback_position.connect(_on_set_playback_position)
 	EventBus.song_request.connect(song_changed)
 	EventBus.metadata_received.connect(_on_metadata_received)
+	
+	for option in EQManager.settings:
+		EQOption.add_item(option["name"])
 
 func _on_metadata_received(meta: MusicMeta.MusicMetadata, file_path):
 	if meta.cover:
@@ -92,20 +96,6 @@ func add_list_of_files(list):
 	for thread: Thread in threads:
 		thread.wait_to_finish()
 
-#func add_list_of_files(list):
-	#for i in list.size():
-		#var b: HBoxContainer = MusicButton.instantiate()
-		#var stream := load_mp3(list[i])
-		#b.meta = MusicMeta.get_metadata_mp3(stream) #TODO: dont load every single file
-		#var filepath: String = list[i]
-		#var filename = filepath.split("/",true)[-1]
-		#b.file = filename
-		#b.path = filepath
-		#b.index = i
-		#b.play_song.connect(play_song.bind(b))
-		#button_list.append(b)
-		#FileDisplayVBox.add_child(b)
-
 func play_song(button):
 	PlayPauseButton.text = "󰏤"
 	EventBus.play.emit()
@@ -162,3 +152,12 @@ func _on_search_bar_text_changed(new_text):
 			button.show()
 		else:
 			button.hide()
+
+func _on_eq_option_item_selected(index):
+	var setting = EQManager.settings[index]
+	var band_idx = 0
+	for band in setting:
+		if band != "name":
+			var eq: AudioEffectEQ = AudioServer.get_bus_effect(0, 3)
+			eq.set_band_gain_db(band_idx, setting[band])
+		band_idx += 1
