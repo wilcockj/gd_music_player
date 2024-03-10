@@ -25,12 +25,15 @@ extends Control
 @onready var PitchSlider := %PitchSlider
 @onready var PlayBackSlider := %PlayBackSlider
 @onready var VolumeSlider := %VolumeSlider
+@onready var Settings := %Settings
+@onready var ExpandSettings := %ExpandSettingsButton
 
 @onready var tmp_art = load("res://assets/images/tmp_art.tres")
 @onready var MusicButton: PackedScene = load("res://scenes/ui/music_button.tscn")
 
 var button_list: Array[HBoxContainer]
 var song_index = -1
+var settings_visible = false
 
 func _process(delta):
 	BGImage.pivot_offset = BGImage.size / 2
@@ -43,6 +46,8 @@ func _ready():
 	
 	for option in EQManager.settings:
 		EQOption.add_item(option["name"])
+		
+	Settings.hide()
 
 func _on_metadata_received(meta: MusicMeta.MusicMetadata, file_path):
 	if meta.cover:
@@ -180,3 +185,13 @@ func _on_playback_reset_pressed():
 
 func _on_volume_reset_pressed():
 	VolumeSlider.value = 100
+
+func _on_expand_settings_button_pressed():
+	settings_visible = !settings_visible
+	if settings_visible:
+		ExpandSettings.text = "󰛃"
+		%SettingsLabel.text = "Settings:"
+	else:
+		ExpandSettings.text = "󰛀"
+		%SettingsLabel.text = "Settings..."
+	Settings.visible = settings_visible
