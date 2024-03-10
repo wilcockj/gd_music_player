@@ -99,7 +99,7 @@ func play_song(button):
 func song_changed(_path,prev_index,new_index):
 	#SongName.text = path.split("/",true)[-1]
 	button_list[prev_index].modulate = Color.WHITE
-	button_list[new_index].modulate = Color.GREEN
+	button_list[new_index].modulate = Color.PALE_GREEN
 	song_index = new_index
 	
 func _on_reverb_check_box_toggled(toggled_on):
@@ -141,8 +141,9 @@ func _on_play_back_slider_value_changed(value):
 	EventBus.change_playback_speed.emit(value)
 
 func _on_search_bar_text_changed(new_text):
-	for button: Button in FileDisplayVBox.get_children():
-		if new_text.to_lower() in button.text.to_lower() or new_text == "":
+	for button in FileDisplayVBox.get_children():
+		var sanitized_search: String = new_text.to_lower()
+		if new_text == "" or button.contains_substr(sanitized_search):
 			button.show()
 		else:
 			button.hide()

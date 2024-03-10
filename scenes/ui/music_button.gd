@@ -17,10 +17,13 @@ func _ready():
 	if meta.cover:
 		$AlbumArt.texture = meta.cover
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
+func contains_substr(msg):
+	if msg in (meta.title.to_lower() if meta.title else file.to_lower()):
+		return true
+	if msg in (meta.artist.to_lower() if meta.artist else "Unknown Artist"):
+		return true
+	if msg in (meta.album.to_lower() if meta.album else "Unknown Album"):
+		return true
 
 func _on_play_button_pressed():
 	play_song.emit()
