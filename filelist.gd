@@ -21,6 +21,10 @@ extends Control
 @onready var SearchBar := %SearchBar
 @onready var FileDisplayVBox := %FileDisplayVbox
 @onready var EQOption := %EQOption
+@onready var Bands := %Bands
+@onready var PitchSlider := %PitchSlider
+@onready var PlayBackSlider := %PlayBackSlider
+@onready var VolumeSlider := %VolumeSlider
 
 @onready var tmp_art = load("res://assets/images/tmp_art.tres")
 @onready var MusicButton: PackedScene = load("res://scenes/ui/music_button.tscn")
@@ -111,7 +115,8 @@ func _on_reverb_check_box_toggled(toggled_on):
 	EventBus.set_reverb.emit(toggled_on)
 
 func _on_pitch_slider_value_changed(value):
-	PitchLabel.text = str(value)
+	AudioServer.set_bus_effect_enabled(0, 1, true)
+	PitchLabel.text = "%.02fx"%value
 	var pitch: AudioEffectPitchShift = AudioServer.get_bus_effect(0, 1)
 	pitch.pitch_scale = value
 
@@ -142,7 +147,7 @@ func _on_scrubber_changed_timer_timeout():
 	EventBus.scrub_to_percent.emit(ScrubberSlider.value / 100.0)
 
 func _on_play_back_slider_value_changed(value):
-	PlayBackLabel.text = "%.01fx"%value
+	PlayBackLabel.text = "%.02fx"%value
 	EventBus.change_playback_speed.emit(value)
 
 func _on_search_bar_text_changed(new_text):
@@ -160,4 +165,18 @@ func _on_eq_option_item_selected(index):
 		if band != "name":
 			var eq: AudioEffectEQ = AudioServer.get_bus_effect(0, 3)
 			eq.set_band_gain_db(band_idx, setting[band])
+			var sliders = Bands.get_children()
+			for slider in sliders:
+				if slider.name == "Band%s"%band_idx:
+					slider.value = setting[band]
 			band_idx += 1
+
+func _on_pitch_reset_pressed():
+	PitchSlider.value = 1.0
+	AudioServer.set_bus_effect_enabled(0, 1, false)
+
+func _on_playback_reset_pressed():
+	PlayBackSlider.value = 1.0
+
+func _on_volume_reset_pressed():
+	VolumeSlider.value = 100
