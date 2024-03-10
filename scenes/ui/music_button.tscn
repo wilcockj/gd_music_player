@@ -40,6 +40,7 @@ theme_override_constants/separation = 0
 alignment = 1
 
 [node name="Title" type="Label" parent="SongInfo"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_dxjbi")
 theme_override_font_sizes/font_size = 20

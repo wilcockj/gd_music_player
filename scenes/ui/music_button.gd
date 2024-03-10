@@ -7,15 +7,21 @@ var file: String
 var path: String
 var index: int
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	$SongInfo/Title.text = meta.title if meta.title else file
-	$SongInfo/ArtistAlbum.text = "%s - %s"%[
-		meta.artist if meta.artist else "Unknown Artist",
-		meta.album if meta.album else "Unknown Album"
-	]
-	if meta.cover:
-		$AlbumArt.texture = meta.cover
+	hide()
+
+func show_data():
+	#TODO: WHY DO I HAVE TO USE A TIMER
+	get_tree().create_timer(0.1).timeout.connect(func():
+		%Title.text = meta.title if meta.title else file
+		$SongInfo/ArtistAlbum.text = "%s - %s"%[
+			meta.artist if meta.artist else "Unknown Artist",
+			meta.album if meta.album else "Unknown Album"
+		]
+		if meta.cover:
+			$AlbumArt.texture = meta.cover
+		show()
+	)
 
 func contains_substr(msg):
 	if msg in (meta.title.to_lower() if meta.title else file.to_lower()):

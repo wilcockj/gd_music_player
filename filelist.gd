@@ -68,28 +68,43 @@ func load_mp3(path) -> AudioStreamMP3:
 	sound.data = file.get_buffer(file.get_length())
 	return sound
 
+func async_update_button_data(index, path, b):
+	var stream := load_mp3(path)
+	b.meta = MusicMeta.get_metadata_mp3(stream) #TODO: dont load every single file
+	var filepath: String = path
+	var filename = filepath.split("/",true)[-1]
+	b.file = filename
+	b.path = filepath
+	b.index = index
+	b.show_data()
+
+
 func add_list_of_files(list):
+	var threads: Array[Thread] = []
 	for i in list.size():
-		#var filepath: String = list[i]
-		#var filename = filepath.split("/",true)[-1]
-		#var new_button := Button.new()
-		#button_list.append(new_button)
-		#new_button.text = filename
-		#new_button.set_meta("path",filepath)
-		#new_button.set_meta("index",i)
-		#new_button.pressed.connect(play_song.bind(new_button))
-		#%FileDisplayVbox.add_child(new_button)
 		var b: HBoxContainer = MusicButton.instantiate()
-		var stream := load_mp3(list[i])
-		b.meta = MusicMeta.get_metadata_mp3(stream) #TODO: dont load every single file
-		var filepath: String = list[i]
-		var filename = filepath.split("/",true)[-1]
-		b.file = filename
-		b.path = filepath
-		b.index = i
-		b.play_song.connect(play_song.bind(b))
 		button_list.append(b)
 		FileDisplayVBox.add_child(b)
+		b.play_song.connect(play_song.bind(b))
+		var t := Thread.new()
+		threads.append(t)
+		t.start(async_update_button_data.bind(i, list[i], b))
+	for thread: Thread in threads:
+		thread.wait_to_finish()
+
+#func add_list_of_files(list):
+	#for i in list.size():
+		#var b: HBoxContainer = MusicButton.instantiate()
+		#var stream := load_mp3(list[i])
+		#b.meta = MusicMeta.get_metadata_mp3(stream) #TODO: dont load every single file
+		#var filepath: String = list[i]
+		#var filename = filepath.split("/",true)[-1]
+		#b.file = filename
+		#b.path = filepath
+		#b.index = i
+		#b.play_song.connect(play_song.bind(b))
+		#button_list.append(b)
+		#FileDisplayVBox.add_child(b)
 
 func play_song(button):
 	PlayPauseButton.text = "󰏤"
