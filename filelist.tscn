@@ -17,10 +17,10 @@ shader_parameter/lod = 6.0
 bg_color = Color(0, 0, 0, 0.298039)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qmn3"]
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 corner_detail = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avyu3"]
@@ -32,6 +32,10 @@ expand_margin_right = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2t1i"]
 bg_color = Color(1, 1, 1, 0.180392)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -101,6 +105,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_3qmn3")
 
 [node name="AlbumArt" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/Panel2"]
 unique_name_in_owner = true
+use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
