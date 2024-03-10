@@ -18,6 +18,8 @@ extends Control
 @onready var ArtistName := %ArtistName
 @onready var BGImage := %BGImage
 @onready var PlayBackLabel := %PlayBackLabel
+@onready var SearchBar := %SearchBar
+@onready var FileDisplayVBox := %FileDisplayVbox
 
 @onready var tmp_art = load("res://assets/images/tmp_art.tres")
 
@@ -119,3 +121,10 @@ func _on_scrubber_changed_timer_timeout():
 func _on_play_back_slider_value_changed(value):
 	PlayBackLabel.text = "%.01fx"%value
 	EventBus.change_playback_speed.emit(value)
+
+func _on_search_bar_text_changed(new_text):
+	for button: Button in FileDisplayVBox.get_children():
+		if new_text in button.text or new_text == "":
+			button.show()
+		else:
+			button.hide()
