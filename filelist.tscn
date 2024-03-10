@@ -31,7 +31,7 @@ expand_margin_right = 1.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4x41l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2t1i"]
-bg_color = Color(1, 1, 1, 0.0470588)
+bg_color = Color(1, 1, 1, 0.180392)
 
 [node name="Control" type="Control"]
 layout_mode = 3
