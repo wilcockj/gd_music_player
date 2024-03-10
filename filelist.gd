@@ -124,7 +124,7 @@ func _on_play_back_slider_value_changed(value):
 
 func _on_search_bar_text_changed(new_text):
 	for button: Button in FileDisplayVBox.get_children():
-		if new_text in button.text or new_text == "":
+		if new_text.to_lower() in button.text.to_lower() or new_text == "":
 			button.show()
 		else:
 			button.hide()
