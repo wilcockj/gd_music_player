@@ -160,4 +160,4 @@ func _on_eq_option_item_selected(index):
 		if band != "name":
 			var eq: AudioEffectEQ = AudioServer.get_bus_effect(0, 3)
 			eq.set_band_gain_db(band_idx, setting[band])
-		band_idx += 1
+			band_idx += 1

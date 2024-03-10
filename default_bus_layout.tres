@@ -12,9 +12,8 @@ resource_name = "PitchShift"
 [sub_resource type="AudioEffectSpectrumAnalyzer" id="AudioEffectSpectrumAnalyzer_j1yi8"]
 resource_name = "SpectrumAnalyzer"
 
-[sub_resource type="AudioEffectEQ10" id="AudioEffectEQ10_uhwab"]
-resource_name = "EQ10"
-band_db/31_hz = 3.33067e-15
+[sub_resource type="AudioEffectEQ6" id="AudioEffectEQ6_o1tt3"]
+resource_name = "EQ6"
 
 [resource]
 bus/0/volume_db = -0.228265
@@ -24,5 +23,5 @@ bus/0/effect/1/effect = SubResource("AudioEffectPitchShift_vfox8")
 bus/0/effect/1/enabled = true
 bus/0/effect/2/effect = SubResource("AudioEffectSpectrumAnalyzer_j1yi8")
 bus/0/effect/2/enabled = true
-bus/0/effect/3/effect = SubResource("AudioEffectEQ10_uhwab")
+bus/0/effect/3/effect = SubResource("AudioEffectEQ6_o1tt3")
 bus/0/effect/3/enabled = true
