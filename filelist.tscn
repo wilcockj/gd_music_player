@@ -277,15 +277,15 @@ text = "100%"
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Search" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Search"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Search:"
 
-[node name="SearchBar" type="LineEdit" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="SearchBar" type="LineEdit" parent="MarginContainer/HBoxContainer/VBoxContainer/Search"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -302,6 +302,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 10
 
 [node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
@@ -320,4 +321,4 @@ script = ExtResource("7_gfv6v")
 [connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/PlaybackSpeed/PlayBackSlider" to="." method="_on_play_back_slider_value_changed"]
 [connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer/Reverb/ReverbCheckBox" to="." method="_on_reverb_check_box_toggled"]
 [connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
-[connection signal="text_changed" from="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/SearchBar" to="." method="_on_search_bar_text_changed"]
+[connection signal="text_changed" from="MarginContainer/HBoxContainer/VBoxContainer/Search/SearchBar" to="." method="_on_search_bar_text_changed"]

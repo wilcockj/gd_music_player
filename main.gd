@@ -65,13 +65,13 @@ func explore_dir(dir):
 	var files = dir.get_files()
 	var dirs = dir.get_directories()
 	for file in files:
-		print("Found file: " + file)
+		#print("Found file: " + file)
 		if file.get_extension() == "mp3":
 			mp3_list.append(dir.get_current_dir() + "/" + file)
 	for cur_dir in dirs:
-		print("Found directory: " + cur_dir)
+		#print("Found directory: " + cur_dir)
 		var new_dir = dir.get_current_dir() + "/" + cur_dir
-		print("new dir: " + new_dir)
+		#print("new dir: " + new_dir)
 		var fs = DirAccess.open(new_dir)
 		explore_dir(fs)
 	

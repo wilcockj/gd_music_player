@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://k447r5iovv83"]
+
+[ext_resource type="Script" path="res://scenes/ui/music_button.gd" id="1_ba04h"]
+[ext_resource type="FontFile" uid="uid://bg7oys2cgqpao" path="res://addons/material-design-icons/fonts/material_design_icons.ttf" id="1_ri68d"]
+[ext_resource type="Script" path="res://addons/material-design-icons/nodes/MaterialButton.gd" id="2_l4tp7"]
+[ext_resource type="Texture2D" uid="uid://5jf1srlo68mb" path="res://assets/images/tempalbumart.png" id="3_q53lt"]
+[ext_resource type="FontFile" uid="uid://r6o61b6yhw6w" path="res://assets/fonts/SpaceMono-Bold.ttf" id="5_dxjbi"]
+[ext_resource type="FontFile" uid="uid://bc5go0altthat" path="res://assets/fonts/SpaceMono-Italic.ttf" id="6_oedr1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nu6df"]
+
+[node name="MusicButton" type="HBoxContainer"]
+offset_right = 297.0
+offset_bottom = 61.0
+script = ExtResource("1_ba04h")
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ri68d")
+theme_override_font_sizes/font_size = 32
+text = "󰐊"
+flat = true
+script = ExtResource("2_l4tp7")
+icon_name = "play"
+icon_size = 32
+
+[node name="AlbumArt" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("3_q53lt")
+expand_mode = 2
+
+[node name="Spacer" type="Panel" parent="."]
+custom_minimum_size = Vector2(5, 2.08165e-12)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nu6df")
+
+[node name="SongInfo" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Title" type="Label" parent="SongInfo"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_dxjbi")
+theme_override_font_sizes/font_size = 20
+text = "Song Name"
+
+[node name="ArtistAlbum" type="Label" parent="SongInfo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.74902, 0.74902, 0.74902, 1)
+theme_override_fonts/font = ExtResource("6_oedr1")
+theme_override_font_sizes/font_size = 12
+text = "Artist - Album Name"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

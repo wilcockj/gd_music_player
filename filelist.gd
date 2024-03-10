@@ -22,8 +22,9 @@ extends Control
 @onready var FileDisplayVBox := %FileDisplayVbox
 
 @onready var tmp_art = load("res://assets/images/tmp_art.tres")
+@onready var MusicButton: PackedScene = load("res://scenes/ui/music_button.tscn")
 
-var button_list: Array[Button]
+var button_list: Array[HBoxContainer]
 var song_index = -1
 
 func _process(delta):
@@ -61,23 +62,40 @@ func _on_set_playback_position(pos, length):
 	ScrubberSlider.value = (pos / length) * 100
 	TimeLeftLabel.text = "-%d:%02d"%[int(floor((length - pos) / 60.0)), int(length - pos) % 60]
 
+func load_mp3(path) -> AudioStreamMP3:
+	var file = FileAccess.open(path, FileAccess.READ)
+	var sound = AudioStreamMP3.new()
+	sound.data = file.get_buffer(file.get_length())
+	return sound
+
 func add_list_of_files(list):
 	for i in list.size():
+		#var filepath: String = list[i]
+		#var filename = filepath.split("/",true)[-1]
+		#var new_button := Button.new()
+		#button_list.append(new_button)
+		#new_button.text = filename
+		#new_button.set_meta("path",filepath)
+		#new_button.set_meta("index",i)
+		#new_button.pressed.connect(play_song.bind(new_button))
+		#%FileDisplayVbox.add_child(new_button)
+		var b: HBoxContainer = MusicButton.instantiate()
+		var stream := load_mp3(list[i])
+		b.meta = MusicMeta.get_metadata_mp3(stream) #TODO: dont load every single file
 		var filepath: String = list[i]
 		var filename = filepath.split("/",true)[-1]
-		var new_button = Button.new()
-		button_list.append(new_button)
-		new_button.text = filename
-		new_button.set_meta("path",filepath)
-		new_button.set_meta("index",i)
-		new_button.pressed.connect(play_song.bind(new_button))
-		%FileDisplayVbox.add_child(new_button)
+		b.file = filename
+		b.path = filepath
+		b.index = i
+		b.play_song.connect(play_song.bind(b))
+		button_list.append(b)
+		FileDisplayVBox.add_child(b)
 
 func play_song(button):
 	PlayPauseButton.text = "󰏤"
 	EventBus.play.emit()
-	EventBus.song_request.emit(button.get_meta("path"),song_index,button.get_meta("index"))
-	
+	EventBus.song_request.emit(button.path, song_index, button.index)
+		
 func song_changed(_path,prev_index,new_index):
 	#SongName.text = path.split("/",true)[-1]
 	button_list[prev_index].modulate = Color.WHITE
