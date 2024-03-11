@@ -42,36 +42,15 @@ func _on_set_reverb(onoff):
 	AudioServer.set_bus_effect_enabled(0, 0, onoff)
 
 func explore_dir(dir):
-	'''
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if dir.current_is_dir():
-				print("Found directory: " + file_name)
-				var new_dir = dir.get_current_dir() + "/" + file_name
-				print("new dir: " + new_dir)
-				var fs = DirAccess.open(new_dir)
-				explore_dir(fs)
-			else:
-				print("Found file: " + file_name)
-				if file_name.get_extension() == "mp3":
-					mp3_list.append(dir.get_current_dir() + "/" + file_name)
-			file_name = dir.get_next()
-	'''
-	
 	if not dir:
 		return		
 	var files = dir.get_files()
 	var dirs = dir.get_directories()
 	for file in files:
-		#print("Found file: " + file)
 		if file.get_extension() == "mp3":
 			mp3_list.append(dir.get_current_dir() + "/" + file)
 	for cur_dir in dirs:
-		#print("Found directory: " + cur_dir)
 		var new_dir = dir.get_current_dir() + "/" + cur_dir
-		#print("new dir: " + new_dir)
 		var fs = DirAccess.open(new_dir)
 		explore_dir(fs)
 	
@@ -92,7 +71,7 @@ func _on_song_request(song_path,_prev_index,new_index):
 	$AudioStreamPlayer.playing = true
 	current_song_idx = new_index
 	
-	var meta: MusicMeta.MusicMetadata = MusicMeta.get_metadata_mp3(stream)
+	var meta: MusicMeta.MusicMetadata = MusicMeta.get_mp3_metadata(stream)
 	EventBus.metadata_received.emit(meta, song_path)
 	
 func load_mp3(path):

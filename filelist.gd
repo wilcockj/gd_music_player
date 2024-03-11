@@ -83,7 +83,7 @@ func load_mp3(path) -> AudioStreamMP3:
 
 func async_update_button_data(index, path, b):
 	var stream := load_mp3(path)
-	b.meta = MusicMeta.get_metadata_mp3(stream) #TODO: dont load every single file
+	b.meta = MusicMeta.get_mp3_metadata(stream) #TODO: dont load every single file
 	var filepath: String = path
 	var filename = filepath.split("/",true)[-1]
 	b.file = filename
