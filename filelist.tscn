@@ -157,6 +157,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="BackButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/Controls"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 2.08165e-12)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_15vpq")
@@ -180,6 +181,7 @@ icon_name = "pause"
 icon_size = 32
 
 [node name="ForwardButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/Controls"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_15vpq")
@@ -212,10 +214,11 @@ layout_mode = 2
 [node name="PitchReset" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/Pitch"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_15vpq")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 0
 text = "󰑓"
 script = ExtResource("5_00kdk")
 icon_name = "reload"
+icon_size = 0
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Pitch"]
 layout_mode = 2
@@ -242,10 +245,11 @@ layout_mode = 2
 [node name="PlaybackReset" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/PlaybackSpeed"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_15vpq")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 0
 text = "󰑓"
 script = ExtResource("5_00kdk")
 icon_name = "reload"
+icon_size = 0
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/PlaybackSpeed"]
 layout_mode = 2
@@ -272,10 +276,11 @@ layout_mode = 2
 [node name="VolumeReset" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/Volume"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_15vpq")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 0
 text = "󰑓"
 script = ExtResource("5_00kdk")
 icon_name = "reload"
+icon_size = 0
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Volume"]
 layout_mode = 2
@@ -462,7 +467,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_x2t1i")
 script = ExtResource("7_gfv6v")
 
 [connection signal="drag_ended" from="MarginContainer/HBoxContainer/VBoxContainer2/Scrubber/ScrubberSlider" to="." method="_on_scrubber_slider_drag_ended"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/Controls/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/Controls/PlayPauseButton" to="." method="_on_play_pause_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/Controls/ForwardButton" to="." method="_on_forward_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Pitch/PitchReset" to="." method="_on_pitch_reset_pressed"]
 [connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/Pitch/PitchSlider" to="." method="_on_pitch_slider_value_changed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/PlaybackSpeed/PlaybackReset" to="." method="_on_playback_reset_pressed"]

@@ -104,7 +104,7 @@ func play_song(button):
 	PlayPauseButton.text = "󰏤"
 	EventBus.play.emit()
 	EventBus.song_request.emit(button.path, song_index, button.index)
-		
+	
 func song_changed(_path,prev_index,new_index):
 	#SongName.text = path.split("/",true)[-1]
 	button_list[prev_index].modulate = Color.WHITE
@@ -180,3 +180,19 @@ func _on_playback_reset_pressed():
 
 func _on_volume_reset_pressed():
 	VolumeSlider.value = 100
+
+
+func _on_back_button_pressed():
+	PlayPauseButton.text = "󰏤"
+	EventBus.prev_song.emit()
+	print("Prev Song request")
+	if song_index > 0:
+		EventBus.song_request.emit(button_list[song_index-1].path, song_index, song_index-1)
+
+
+func _on_forward_button_pressed():
+	PlayPauseButton.text = "󰏤"
+	EventBus.skip_song.emit()
+	print("Next Song request")
+	if song_index < button_list.size():
+		EventBus.song_request.emit(button_list[song_index+1].path, song_index, song_index+1)
