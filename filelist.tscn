@@ -17,10 +17,10 @@ shader_parameter/lod = 6.0
 bg_color = Color(0, 0, 0, 0.298039)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qmn3"]
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 corner_detail = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avyu3"]
@@ -31,7 +31,11 @@ expand_margin_right = 1.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4x41l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2t1i"]
-bg_color = Color(1, 1, 1, 0.0470588)
+bg_color = Color(1, 1, 1, 0.180392)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -101,6 +105,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_3qmn3")
 
 [node name="AlbumArt" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2/MarginContainer/Panel2"]
 unique_name_in_owner = true
+use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,7 +115,11 @@ grow_vertical = 2
 size_flags_vertical = 3
 texture = ExtResource("3_gk44b")
 
-[node name="SongName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SongName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_6el5d")
@@ -118,7 +127,7 @@ theme_override_font_sizes/font_size = 25
 text = "No Song Playing"
 horizontal_alignment = 1
 
-[node name="ArtistName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="ArtistName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.701961, 0.701961, 0.701961, 1)
@@ -203,15 +212,33 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="SettingsDropdown" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ExpandSettingsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/SettingsDropdown"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_15vpq")
+theme_override_font_sizes/font_size = 16
+text = "󰛀"
+flat = true
+script = ExtResource("5_00kdk")
+icon_name = "arrow-down-box"
+
+[node name="SettingsLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/SettingsDropdown"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "Settings:"
+text = "Settings..."
 
-[node name="Pitch" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Settings" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="PitchReset" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/Pitch"]
+[node name="Pitch" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings"]
+layout_mode = 2
+
+[node name="PitchReset" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/Pitch"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_15vpq")
 theme_override_font_sizes/font_size = 0
@@ -220,11 +247,11 @@ script = ExtResource("5_00kdk")
 icon_name = "reload"
 icon_size = 0
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Pitch"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/Pitch"]
 layout_mode = 2
 text = "Pitch:          "
 
-[node name="PitchSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/Pitch"]
+[node name="PitchSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/Pitch"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 2.08165e-12)
 layout_mode = 2
@@ -234,15 +261,15 @@ max_value = 2.0
 step = 0.01
 value = 1.0
 
-[node name="PitchLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Pitch"]
+[node name="PitchLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/Pitch"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "1.00x"
 
-[node name="PlaybackSpeed" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="PlaybackSpeed" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings"]
 layout_mode = 2
 
-[node name="PlaybackReset" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/PlaybackSpeed"]
+[node name="PlaybackReset" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/PlaybackSpeed"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_15vpq")
 theme_override_font_sizes/font_size = 0
@@ -251,11 +278,11 @@ script = ExtResource("5_00kdk")
 icon_name = "reload"
 icon_size = 0
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/PlaybackSpeed"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/PlaybackSpeed"]
 layout_mode = 2
 text = "Playback Speed: "
 
-[node name="PlayBackSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/PlaybackSpeed"]
+[node name="PlayBackSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/PlaybackSpeed"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 2.08165e-12)
 layout_mode = 2
@@ -265,15 +292,15 @@ max_value = 2.0
 step = 0.01
 value = 1.0
 
-[node name="PlayBackLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/PlaybackSpeed"]
+[node name="PlayBackLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/PlaybackSpeed"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "1.00x"
 
-[node name="Volume" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Volume" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings"]
 layout_mode = 2
 
-[node name="VolumeReset" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/Volume"]
+[node name="VolumeReset" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/Volume"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_15vpq")
 theme_override_font_sizes/font_size = 0
@@ -282,69 +309,69 @@ script = ExtResource("5_00kdk")
 icon_name = "reload"
 icon_size = 0
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Volume"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/Volume"]
 layout_mode = 2
 text = "Volume:         "
 
-[node name="VolumeSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/Volume"]
+[node name="VolumeSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/Volume"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 2.08165e-12)
 layout_mode = 2
 size_flags_vertical = 4
 value = 100.0
 
-[node name="VolumeLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Volume"]
+[node name="VolumeLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/Volume"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "100%"
 
-[node name="Reverb" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Reverb" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings"]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/Reverb"]
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/Reverb"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_4x41l")
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Reverb"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/Reverb"]
 layout_mode = 2
 text = "Reverb:         "
 
-[node name="ReverbCheckBox" type="CheckBox" parent="MarginContainer/HBoxContainer/VBoxContainer/Reverb"]
+[node name="ReverbCheckBox" type="CheckBox" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/Reverb"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings"]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/HBoxContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_4x41l")
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/HBoxContainer"]
 layout_mode = 2
 text = "EQ:             "
 
-[node name="EQOption" type="OptionButton" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="EQOption" type="OptionButton" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="EQ" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="EQ" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings"]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/EQ"]
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/EQ"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_4x41l")
 
-[node name="Bands" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/EQ"]
+[node name="Bands" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/EQ"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 0
 
-[node name="Band0" type="VSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/EQ/Bands"]
+[node name="Band0" type="VSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/EQ/Bands"]
 custom_minimum_size = Vector2(2.08165e-12, 100)
 layout_mode = 2
 min_value = -12.0
@@ -353,7 +380,7 @@ step = 0.1
 editable = false
 scrollable = false
 
-[node name="Band1" type="VSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/EQ/Bands"]
+[node name="Band1" type="VSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/EQ/Bands"]
 custom_minimum_size = Vector2(2.08165e-12, 100)
 layout_mode = 2
 min_value = -12.0
@@ -362,7 +389,7 @@ step = 0.1
 editable = false
 scrollable = false
 
-[node name="Band2" type="VSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/EQ/Bands"]
+[node name="Band2" type="VSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/EQ/Bands"]
 custom_minimum_size = Vector2(2.08165e-12, 100)
 layout_mode = 2
 min_value = -12.0
@@ -371,7 +398,7 @@ step = 0.1
 editable = false
 scrollable = false
 
-[node name="Band3" type="VSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/EQ/Bands"]
+[node name="Band3" type="VSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/EQ/Bands"]
 custom_minimum_size = Vector2(2.08165e-12, 100)
 layout_mode = 2
 min_value = -12.0
@@ -380,7 +407,7 @@ step = 0.1
 editable = false
 scrollable = false
 
-[node name="Band4" type="VSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/EQ/Bands"]
+[node name="Band4" type="VSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/EQ/Bands"]
 custom_minimum_size = Vector2(2.08165e-12, 100)
 layout_mode = 2
 min_value = -12.0
@@ -389,7 +416,7 @@ step = 0.1
 editable = false
 scrollable = false
 
-[node name="Band5" type="VSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/EQ/Bands"]
+[node name="Band5" type="VSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/EQ/Bands"]
 custom_minimum_size = Vector2(2.08165e-12, 100)
 layout_mode = 2
 min_value = -12.0
@@ -398,17 +425,17 @@ step = 0.1
 editable = false
 scrollable = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/EQ"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/EQ"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/EQ/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/EQ/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 2
 theme_override_font_sizes/font_size = 13
 text = "+12dB"
 horizontal_alignment = 2
 
-[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/EQ/VBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Settings/EQ/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 13
@@ -478,4 +505,13 @@ script = ExtResource("7_gfv6v")
 [connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer/Reverb/ReverbCheckBox" to="." method="_on_reverb_check_box_toggled"]
 [connection signal="item_selected" from="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/EQOption" to="." method="_on_eq_option_item_selected"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/SettingsDropdown/ExpandSettingsButton" to="." method="_on_expand_settings_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Settings/Pitch/PitchReset" to="." method="_on_pitch_reset_pressed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/Settings/Pitch/PitchSlider" to="." method="_on_pitch_slider_value_changed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Settings/PlaybackSpeed/PlaybackReset" to="." method="_on_playback_reset_pressed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/Settings/PlaybackSpeed/PlayBackSlider" to="." method="_on_play_back_slider_value_changed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Settings/Volume/VolumeReset" to="." method="_on_volume_reset_pressed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/Settings/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer/Settings/Reverb/ReverbCheckBox" to="." method="_on_reverb_check_box_toggled"]
+[connection signal="item_selected" from="MarginContainer/HBoxContainer/VBoxContainer/Settings/HBoxContainer/EQOption" to="." method="_on_eq_option_item_selected"]
 [connection signal="text_changed" from="MarginContainer/HBoxContainer/VBoxContainer/Search/SearchBar" to="." method="_on_search_bar_text_changed"]

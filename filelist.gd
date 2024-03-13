@@ -25,12 +25,15 @@ extends Control
 @onready var PitchSlider := %PitchSlider
 @onready var PlayBackSlider := %PlayBackSlider
 @onready var VolumeSlider := %VolumeSlider
+@onready var Settings := %Settings
+@onready var ExpandSettings := %ExpandSettingsButton
 
 @onready var tmp_art = load("res://assets/images/tmp_art.tres")
 @onready var MusicButton: PackedScene = load("res://scenes/ui/music_button.tscn")
 
 var button_list: Array[HBoxContainer]
 var song_index = -1
+var settings_visible = false
 
 func _process(delta):
 	BGImage.pivot_offset = BGImage.size / 2
@@ -43,6 +46,8 @@ func _ready():
 	
 	for option in EQManager.settings:
 		EQOption.add_item(option["name"])
+		
+	Settings.hide()
 
 func _on_metadata_received(meta: MusicMeta.MusicMetadata, file_path):
 	if meta.cover:
@@ -78,7 +83,7 @@ func load_mp3(path) -> AudioStreamMP3:
 
 func async_update_button_data(index, path, b):
 	var stream := load_mp3(path)
-	b.meta = MusicMeta.get_metadata_mp3(stream) #TODO: dont load every single file
+	b.meta = MusicMeta.get_mp3_metadata(stream) #TODO: dont load every single file
 	var filepath: String = path
 	var filename = filepath.split("/",true)[-1]
 	b.file = filename
@@ -181,7 +186,6 @@ func _on_playback_reset_pressed():
 func _on_volume_reset_pressed():
 	VolumeSlider.value = 100
 
-
 func _on_back_button_pressed():
 	PlayPauseButton.text = "󰏤"
 	EventBus.prev_song.emit()
@@ -196,3 +200,13 @@ func _on_forward_button_pressed():
 	print("Next Song request")
 	if song_index < button_list.size():
 		EventBus.song_request.emit(button_list[song_index+1].path, song_index, song_index+1)
+
+func _on_expand_settings_button_pressed():
+	settings_visible = !settings_visible
+	if settings_visible:
+		ExpandSettings.text = "󰛃"
+		%SettingsLabel.text = "Settings:"
+	else:
+		ExpandSettings.text = "󰛀"
+		%SettingsLabel.text = "Settings..."
+	Settings.visible = settings_visible

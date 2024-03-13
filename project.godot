@@ -24,8 +24,8 @@ driver/mix_rate.web=44100
 
 EventBus="*res://EventBus.gd"
 MaterialIconsDB="*res://addons/material-design-icons/icons/icons.gd"
-MusicMeta="*res://addons/MusicMeta/MusicMeta.gd"
 EQManager="*res://autoloads/EQManager.gd"
+MusicMeta="*res://addons/MusicMeta/MusicMeta.gd"
 
 [display]
 

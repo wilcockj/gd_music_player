@@ -1,10 +1,10 @@
 extends Node2D
 
-const VU_COUNT = 500
+const VU_COUNT = 250
 const FREQ_MAX = 11050.0
 const MIN_DB = 60
-const SMOOTHING_RISE = 0.5  # This value now affects both rising and falling movements equally
-const SMOOTHING_FALL = 0.2
+const SMOOTHING_RISE = 0.8  # This value now affects both rising and falling movements equally
+const SMOOTHING_FALL = 0.15
 
 var spectrum
 
@@ -48,7 +48,7 @@ func update_average_magnitudes():
 			# Falling: Perhaps apply a different factor or same based on desired effect
 			average_magnitudes[i - 1] = lerp(average_magnitudes[i - 1], magnitude, SMOOTHING_FALL)
 		# Clamp to zero if very small, to avoid drawing noise
-		if average_magnitudes[i - 1] < 0.0011:
+		if average_magnitudes[i - 1] < 0.001:
 			average_magnitudes[i - 1] = 0
 		prev_hz = hz
 
@@ -63,5 +63,5 @@ func _draw():
 		var magnitude = average_magnitudes[i]
 		var energy = clamp((MIN_DB + linear_to_db(magnitude)) / MIN_DB, 0, 1)
 		var height = energy * HEIGHT
-		draw_rect(Rect2(w * i, HEIGHT - height, w, height), Color.PALE_GREEN)
-		draw_rect(Rect2(w * i, HEIGHT, w, height), Color.PALE_GREEN)
+		draw_rect(Rect2(w * i, HEIGHT - height, w, height), Color(1, 1, 1, 0.5)) 
+		draw_rect(Rect2(w * i, HEIGHT, w, height), Color(1, 1, 1, 0.5)) # mirror bar
